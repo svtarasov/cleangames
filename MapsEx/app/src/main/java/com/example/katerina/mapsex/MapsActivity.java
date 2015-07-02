@@ -1,22 +1,35 @@
 package com.example.katerina.mapsex;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-
+    public String textButton = "Hey";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
+        Button button1 = (Button) findViewById(R.id.button1);
+        button1.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapsActivity.this, TeamsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -44,14 +57,27 @@ public class MapsActivity extends FragmentActivity {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                    .getMap();
+            //mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+            //        .getMap();
+
+            SupportMapFragment mapFrag = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.map);
+
+            mMap = mapFrag.getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();
             }
         }
         mMap.setMyLocationEnabled(true);
+
+        mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(10, 10))
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                .title("Hello world"));
+
+
+
     }
 
     /**
