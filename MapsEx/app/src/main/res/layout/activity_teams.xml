@@ -7,18 +7,25 @@
     tools:context="com.example.katerina.mapsex.TeamsActivity"
     android:id="@+id/teams">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/teamslayout">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button2"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:clickable="true"
-        android:onClick="button2OnClick" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Teams"
+            android:id="@+id/teamsText"
+            android:layout_gravity="center_horizontal" />
 
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listTeams"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true" />
+    </LinearLayout>
 </RelativeLayout>

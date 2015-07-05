@@ -6,14 +6,40 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 
 public class TeamsActivity extends ActionBarActivity {
+
+    public TeamsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teams);
+
+
+        final ListView listViewTeams = (ListView) findViewById(R.id.listTeams);
+       // listViewTeams.getSelectedItem()
+        ArrayList<String> exampleList = new ArrayList<String>();
+        exampleList.add("something");
+        exampleList.add("anything");
+        exampleList.add("nothing");
+        mAdapter = new TeamsAdapter(this, R.layout.activity_teams, exampleList);
+        listViewTeams.setAdapter(mAdapter);
+        listViewTeams.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(TeamsActivity.this, CertainTeamActivity.class);
+                String teamName = (String) parent.getItemAtPosition(position);
+
+                intent.putExtra("Name", teamName);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -23,10 +49,12 @@ public class TeamsActivity extends ActionBarActivity {
         return true;
     }
 
-    public void button2OnClick(View view){
+/*    public void button2OnClick(View view){
         Intent intent1 = new Intent(TeamsActivity.this, MapsActivity.class);
         startActivity(intent1);
     }
+    */
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

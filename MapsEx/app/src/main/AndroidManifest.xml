@@ -38,6 +38,10 @@
             android:name=".TeamsActivity"
             android:label="@string/title_activity_teams" >
         </activity>
+        <activity
+            android:name=".CertainTeamActivity"
+            android:label="@string/title_activity_certain_team" >
+        </activity>
     </application>
 
 </manifest>
