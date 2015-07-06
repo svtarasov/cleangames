@@ -20,23 +20,23 @@ public class TeamsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teams);
-
+        setTitle("Teams");
 
         final ListView listViewTeams = (ListView) findViewById(R.id.listTeams);
        // listViewTeams.getSelectedItem()
-        ArrayList<String> exampleList = new ArrayList<String>();
-        exampleList.add("something");
-        exampleList.add("anything");
-        exampleList.add("nothing");
-        mAdapter = new TeamsAdapter(this, R.layout.activity_teams, exampleList);
+        ArrayList<Team> exampleList = new ArrayList<Team>();
+        exampleList.add(new Team("1", "something"));
+        exampleList.add(new Team("2", "anything"));
+        exampleList.add(new Team("3", "nothing"));
+        mAdapter = new TeamsAdapter(this,exampleList);
         listViewTeams.setAdapter(mAdapter);
         listViewTeams.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(TeamsActivity.this, CertainTeamActivity.class);
-                String teamName = (String) parent.getItemAtPosition(position);
+                Team team = (Team) parent.getItemAtPosition(position);
 
-                intent.putExtra("Name", teamName);
+                intent.putExtra("Name", team.name);
                 startActivity(intent);
             }
         });

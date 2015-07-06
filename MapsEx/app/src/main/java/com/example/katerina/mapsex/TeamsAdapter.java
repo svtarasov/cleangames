@@ -12,12 +12,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import static android.support.v4.app.ActivityCompat.startActivity;
 
-public class TeamsAdapter extends ArrayAdapter<String> {
+public class TeamsAdapter extends ArrayAdapter<Team> {
     /**
      * Adapter context
      */
@@ -26,38 +27,28 @@ public class TeamsAdapter extends ArrayAdapter<String> {
     /**
      * Adapter View layout
      */
-    int mLayoutResourceId;
-    public ArrayList<String> itemsArrayList;
 
-    public TeamsAdapter(Context context, int layoutResourceId, ArrayList<String> listOfItems) {
-        super(context, layoutResourceId);
-        mContext = context;
-        mLayoutResourceId = layoutResourceId;
-        this.itemsArrayList =listOfItems;
+
+    public TeamsAdapter(Context context, ArrayList<Team> teams) {
+        super(context, 0, teams);
     }
 
-    /**
-     * Returns the view for a specific item on the list
-     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-
-        final String currentItem = getItem(position);
-
-        if (row == null) {
-            LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
-            row = inflater.inflate(mLayoutResourceId, parent, false);
+        // Get the data item for this position
+        Team team = getItem(position);
+        // Check if an existing view is being reused, otherwise inflate the view
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_teams, parent, false);
         }
-
-        row.setTag(currentItem);
-        ListView item = (ListView) row.findViewById(R.id.listTeams);
-        //item.setText(currentItem.toString());
-        //item.se
-        item.setEnabled(true);
-
-
-        return row;
+        // Lookup view for data population
+        TextView teamName = (TextView) convertView.findViewById(R.id.teamName);
+        TextView teamId = (TextView) convertView.findViewById(R.id.teamId);
+        // Populate the data into the template view using the data object
+        teamName.setText(team.name);
+        teamId.setText(team.id);
+        // Return the completed view to render on screen
+        return convertView;
     }
 
 }
