@@ -14,14 +14,12 @@ public class CertainTeamActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_certain_team);
         Bundle extras = getIntent().getExtras();
-        TextView nameCertTeam = (TextView) findViewById(R.id.nameCertTeam);
         String str ;
         if(extras == null) {
             str= null;
         } else {
             str= extras.getString("Name");
         }
-        nameCertTeam.setText(str);
         setTitle(str);
     }
 

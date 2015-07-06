@@ -25,7 +25,7 @@ public class MapsActivity extends FragmentActivity {
         button1.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MapsActivity.this, TeamsActivity.class);
+                Intent intent = new Intent(MapsActivity.this, GamesActivity.class);
                 startActivity(intent);
             }
         });
