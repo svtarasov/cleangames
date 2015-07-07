@@ -27,7 +27,10 @@ import android.widget.TextView;
 import com.facebook.FacebookSdk;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import ru.ulogin.sdk.UloginAuthActivity;
 
 
 /**
@@ -310,5 +313,35 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
         }
     }
+
+    public void authorize(View view) {
+        runUlogin();
+    }
+
+    public final int REQUEST_ULOGIN = 1; //можно задать константе любое другое значение
+
+    public void runUlogin() {
+        Intent intent = new Intent(getApplicationContext(),UloginAuthActivity.class);
+
+        String[] providers		= new String[] {"vkontakte", "facebook" };
+        String[] mandatory_fields	= new String[] {"first_name", "last_name" };
+        String[] optional_fields	= new String[] {"nickname","photo"};
+
+        intent.putExtra(
+                UloginAuthActivity.PROVIDERS,
+                new ArrayList(Arrays.asList(providers))
+        );
+        intent.putExtra(
+                UloginAuthActivity.FIELDS,
+                new ArrayList(Arrays.asList(mandatory_fields))
+        );
+        intent.putExtra(
+                UloginAuthActivity.OPTIONAL,
+                new ArrayList(Arrays.asList(optional_fields))
+        );
+
+        startActivityForResult(intent, REQUEST_ULOGIN);
+    }
+
 }
 

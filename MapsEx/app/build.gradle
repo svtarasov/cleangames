@@ -24,4 +24,11 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.google.android.gms:play-services:7.5.0'
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
+    compile(name:'ulogin-sdk-v1.1', ext:'aar')
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
 }
