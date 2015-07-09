@@ -14,13 +14,13 @@
         android:id="@+id/teamslayout"
         android:weightSum="1">
 
+
         <ListView
-            android:layout_width="match_parent"
-            android:layout_height="390dp"
+            android:layout_width="337dp"
+            android:layout_height="278dp"
             android:id="@+id/listTeams"
-            android:layout_gravity="center_horizontal"
             android:clickable="true"
-            android:layout_weight="0.84" />
+            android:layout_weight="0.92" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -32,6 +32,7 @@
             android:clickable="true" />
 
     </LinearLayout>
+
 
     <TextView
         android:layout_width="209dp"
