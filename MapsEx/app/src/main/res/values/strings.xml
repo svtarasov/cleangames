@@ -15,11 +15,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-<<<<<<< HEAD
+
     <string name="title_activity_parol">ParolActivity</string>
     <string name="title_activity_registration">Registration</string>
-=======
+
     <string name="title_activity_certain_team">CertainTeamActivity</string>
     <string name="title_activity_games">GamesActivity</string>
->>>>>>> origin/master
+
 </resources>
