@@ -1,4 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="title_activity_activity_2">Activity_2</string>
+    <string name="plus">+</string>
+    <string name="garbage1">Смешанный мусор</string>
+    <string name="garbage2">Стекло</string>
+    <string name="garbage3">Бумага</string>
+    <string name="minus">-</string>
+
     <string name="app_name">MapsEx</string>
     <string name="title_activity_maps">Map</string>
     <string name="button1">Button1</string>
@@ -6,6 +15,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+<<<<<<< HEAD
     <string name="title_activity_parol">ParolActivity</string>
     <string name="title_activity_registration">Registration</string>
+=======
+    <string name="title_activity_certain_team">CertainTeamActivity</string>
+    <string name="title_activity_games">GamesActivity</string>
+>>>>>>> origin/master
 </resources>
