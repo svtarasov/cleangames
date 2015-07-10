@@ -50,6 +50,12 @@ public class TeamsActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+        findViewById(R.id.buttonCreateTeam).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TeamsActivity.this, NewTeamActivity.class));
+            }
+        });
     }
 
 

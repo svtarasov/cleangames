@@ -81,7 +81,10 @@
             android:label="@string/title_activity_games" >
         </activity>
 
-
+        <activity
+            android:name=".NewTeamActivity"
+            android:label="@string/title_activity_new_team" >
+        </activity>
 
     <activity android:name="ru.ulogin.sdk.UloginAuthActivity"
             android:configChanges="orientation|screenSize" />

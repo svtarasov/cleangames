@@ -6,37 +6,40 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
-public class CertainTeamActivity extends ActionBarActivity {
+public class NewTeamActivity extends ActionBarActivity {
+
+    EditText NameOfTeam;
+    TextView NoName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_certain_team);
-        Bundle extras = getIntent().getExtras();
-        String str ;
-        if(extras == null) {
-            str= null;
-        } else {
-            str= extras.getString("Name");
-        }
-        setTitle(str);
-        findViewById(R.id.Map).setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_new_team);
+        setTitle("New Team");
+        NameOfTeam = (EditText) findViewById(R.id.NameOfTeam);
+        NoName = (TextView) findViewById(R.id.NoName);
+        findViewById(R.id.Create).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CertainTeamActivity.this, DemoActivity.class));
+            public void onClick(View view) {
+                if (NameOfTeam.getText().length() == 0) {
+                    NoName.setText("Input the name of the team!");
+                } else {
+                    startActivity(new Intent(NewTeamActivity.this, TeamsActivity.class));
+                }
             }
         });
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_certain_team, menu);
+        getMenuInflater().inflate(R.menu.menu_new_team, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
