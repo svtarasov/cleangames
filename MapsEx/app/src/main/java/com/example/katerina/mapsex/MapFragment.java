@@ -1,8 +1,6 @@
 package com.example.katerina.mapsex;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
@@ -16,6 +14,7 @@ import android.view.ViewTreeObserver;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -73,7 +72,8 @@ public class MapFragment
     //контейнер всплывающего окна
     private View infoWindowContainer;
     private TextView textView;
-    private TextView button;
+    private ImageView myImageView;
+    private Button delete;
 
     public MapFragment(){
         this.setRetainInstance(true);
@@ -93,6 +93,7 @@ public class MapFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.activity_map_fragment, null);
+        delete=(Button) rootView.findViewById(R.id.delete);
         Button button1 = (Button) rootView.findViewById(R.id.button7);
         button1.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -122,17 +123,7 @@ public class MapFragment
 
 
 
-        //map.clear();
-        //spots.clear();
-        /*BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.pin);
-        for (CheckIn spot : SPOTS_ARRAY) {
-            Marker marker = map.addMarker(new MarkerOptions()
-                    .position(spot.getPosition())
-                    .title("Title")
-                    .snippet("Subtitle")
-                    .icon(icon));
-            spots.put(marker, spot);
-        }*/
+
 
         infoWindowContainer = rootView.findViewById(R.id.container_popup);
         //подписываемся на изменения размеров всплывающего окна
@@ -141,6 +132,7 @@ public class MapFragment
         overlayLayoutParams = (AbsoluteLayout.LayoutParams) infoWindowContainer.getLayoutParams();
 
         textView = (TextView) infoWindowContainer.findViewById(R.id.textview_title);
+        myImageView = (ImageView)infoWindowContainer.findViewById(R.id.imageView);
       //  button = (TextView) infoWindowContainer.findViewById(R.id.button_view_article);
        // button.setOnClickListener(this);
 
@@ -190,7 +182,7 @@ public class MapFragment
 
 
     @Override
-    public boolean onMarkerClick(Marker marker) {
+    public boolean onMarkerClick(final Marker marker) {
         GoogleMap map = getMap();
         Projection projection = map.getProjection();
         trackedPosition = marker.getPosition();
@@ -201,7 +193,17 @@ public class MapFragment
 
         CheckIn spot = spots.get(marker);
         textView.setText(spot.getName());
-      //  button.setTag(spot.getName());
+        myImageView.setImageResource(R.drawable.hellokitty);
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spots.remove(marker);
+                marker.remove();
+                infoWindowContainer.setVisibility(INVISIBLE);
+
+            }
+        });
 
         infoWindowContainer.setVisibility(VISIBLE);
 

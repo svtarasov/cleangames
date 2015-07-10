@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.katerina.mapsex.R;
-
 
 public class CheckInInfoActivity extends Activity{
     String a, b;
@@ -21,17 +19,20 @@ public class CheckInInfoActivity extends Activity{
         Text1 = (EditText) findViewById(R.id.EditText01);
 
 
-        final Button button1 = (Button) findViewById(R.id.button1);
+        final Button button1 = (Button) findViewById(R.id.button_submit);
         final EditText garbage1=(EditText)findViewById(R.id.garbage1);
         final EditText garbage2=(EditText)findViewById(R.id.garbage2);
         final EditText garbage3=(EditText)findViewById(R.id.garbage3);
+        final EditText garbage4=(EditText)findViewById(R.id.garbage4);
+        final EditText garbage5=(EditText)findViewById(R.id.garbage5);
+
 
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
 
                     a = Text1.getText().toString()+" ";
-                    b= getResources().getString(R.string.garbage1)+": "+garbage1.getText().toString()+"\n"+getResources().getString(R.string.garbage2)+": "+garbage2.getText()+"\n"+getResources().getString(R.string.garbage3)+": "+garbage3.getText();
+                    b= getResources().getString(R.string.garbage1)+": "+garbage1.getText().toString()+"\n"+getResources().getString(R.string.garbage2)+": "+garbage2.getText()+"\n"+getResources().getString(R.string.garbage3)+": "+garbage3.getText()+"\n"+getResources().getString(R.string.garbage4)+": "+garbage4.getText()+"\n"+getResources().getString(R.string.garbage5)+": "+garbage5.getText();
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("comment",a);
                     returnIntent.putExtra("garbage",b);
@@ -118,6 +119,51 @@ public class CheckInInfoActivity extends Activity{
 
         });
 
+        final Button button7 = (Button) findViewById(R.id.button7);
+        button7.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Integer temp= Integer.parseInt(garbage4.getText().toString());
+                if (temp>0){
+                    temp--;
+                    garbage4.getText().clear();
+                    garbage4.getText().append(temp.toString());}
+            }
+
+        });
+
+        final Button button8 = (Button) findViewById(R.id.button8);
+        button8.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Integer temp= Integer.parseInt(garbage4.getText().toString());
+                temp++;
+                garbage4.getText().clear();
+                garbage4.getText().append(temp.toString());
+            }
+
+        });
+
+        final Button button9 = (Button) findViewById(R.id.button9);
+        button9.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Integer temp= Integer.parseInt(garbage5.getText().toString());
+                if (temp>0){
+                    temp--;
+                    garbage5.getText().clear();
+                    garbage5.getText().append(temp.toString());}
+            }
+
+        });
+
+        final Button button10 = (Button) findViewById(R.id.button10);
+        button10.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Integer temp= Integer.parseInt(garbage5.getText().toString());
+                temp++;
+                garbage5.getText().clear();
+                garbage5.getText().append(temp.toString());
+            }
+
+        });
     }
 
 

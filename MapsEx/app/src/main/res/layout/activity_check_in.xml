@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+<LinearLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -15,7 +19,8 @@
         android:lines="3"
         android:nestedScrollingEnabled="true"
         android:focusable="true"
-        android:autoText="false" />
+        android:autoText="false"
+        android:clickable="false" />
 
     <TextView
         android:layout_width="94dp"
@@ -137,14 +142,90 @@
             android:layout_weight="0.05" />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/garbage4"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" >
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/minus"
+            android:id="@+id/button7"
+            android:layout_weight="0.05" />
+
+        <EditText
+            android:layout_width="118dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:id="@+id/garbage4"
+            android:ems="12"
+            android:text="0" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="71dp"
+            android:text="@string/plus"
+            android:id="@+id/button8"
+            android:layout_weight="0.05" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/garbage5"
+        android:id="@+id/textView4"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" >
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/minus"
+            android:id="@+id/button9"
+            android:layout_weight="0.05" />
+
+        <EditText
+            android:layout_width="118dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:id="@+id/garbage5"
+            android:ems="12"
+            android:text="0" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="71dp"
+            android:text="@string/plus"
+            android:id="@+id/button10"
+            android:layout_weight="0.05" />
+    </LinearLayout>
+
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button_submit"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Оставить комментарий"
         android:textSize="30sp" />
 
-
-
-
 </LinearLayout>
+</ScrollView>
