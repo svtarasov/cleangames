@@ -1,14 +1,13 @@
 package com.example.katerina.mapsex;
 
 
+import java.util.ArrayList;
+
 /**
  * Created by Katerina on 06.07.2015.
  */
 public class Team {
-    public String id ;
-    public String name;
-    public Team(String id,String name){
-        this.id = id;
-        this.name = name;
-    }
+    public int ID;
+    public int num_players;
+    public ArrayList<User> arr_players;
 }
