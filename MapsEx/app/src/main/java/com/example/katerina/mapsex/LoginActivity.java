@@ -321,7 +321,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         runUlogin();
     }
 
-    public final int REQUEST_ULOGIN = 1; //можно задать константе любое другое значение
+    public final int REQUEST_ULOGIN = 1;
 
     public void runUlogin() {
         Intent intent = new Intent(getApplicationContext(),UloginAuthActivity.class);

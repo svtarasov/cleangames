@@ -46,7 +46,7 @@ public class GamesAdapter extends ArrayAdapter<Game> {
         TextView gameId = (TextView) convertView.findViewById(R.id.gameId);
         // Populate the data into the template view using the data object
         gameName.setText(game.name);
-        gameId.setText(game.id);
+        gameId.setText(game.ID);
         // Return the completed view to render on screen
         return convertView;
     }

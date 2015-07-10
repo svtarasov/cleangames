@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by Katerina on 06.07.2015.
  */
 public class Game {
-    public int ID;
+    public String ID;
     public String name;
     public Date date;
     public Time start_time;
@@ -17,4 +17,11 @@ public class Game {
     public String description;
     public ArrayList<Location> base_loc;
     public ArrayList<Param> parameters;
+
+
+    Game(String ID,String name){
+        this.ID=ID;
+        this.name=name;
+    }
+
 }
