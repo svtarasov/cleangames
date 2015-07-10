@@ -1,13 +1,16 @@
 package com.example.katerina.mapsex;
 
+import android.text.format.Time;
+
 /**
  * Created by Katerina on 06.07.2015.
  */
 public class User {
-    String id;
-    String name;
-    public User(String id, String name){
-        this.id = id;
-        this.name = name;
-    }
+    public int id;
+    public String name;
+    public String surname;
+    public String email;
+    public Team team;
+    public boolean isAmin;
+    public Time createdTime;
 }
