@@ -31,7 +31,6 @@
             android:value="@string/google_maps_key" />
 
         <activity
-<<<<<<< HEAD
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
@@ -43,10 +42,6 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
-=======
-            android:name=".DemoActivity"
-            android:label="@string/app_name" >
->>>>>>> origin/master
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,7 +49,6 @@
             </intent-filter>
         </activity>
         <activity
-<<<<<<< HEAD
             android:name=".ParolActivity"
             android:label="@string/title_activity_parol"
             android:parentActivityName=".LoginActivity" >
@@ -74,24 +68,6 @@
         <activity android:name="ru.ulogin.sdk.UloginAuthActivity"
             android:configChanges="orientation|screenSize" />
 
-=======
-            android:name=".CheckInInfoActivity"
-            android:label="@string/title_activity_activity_2" >
-        </activity>
-
-        <activity
-            android:name=".TeamsActivity"
-            android:label="@string/title_activity_teams" >
-        </activity>
-        <activity
-            android:name=".CertainTeamActivity"
-            android:label="@string/title_activity_certain_team" >
-        </activity>
-        <activity
-            android:name=".GamesActivity"
-            android:label="@string/title_activity_games" >
-        </activity>
->>>>>>> origin/master
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>
