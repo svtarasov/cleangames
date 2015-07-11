@@ -105,15 +105,7 @@ public class MapFragment
         FrameLayout containerMap = (FrameLayout) rootView.findViewById(R.id.container_map);
         View mapView = super.onCreateView(inflater, container, savedInstanceState);
         containerMap.addView(mapView, new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT));
-        MapFragment mapFragment =
-                (MapFragment) getFragmentManager().findFragmentById(R.id.container_map_fragment);
-
-        if (savedInstanceState == null) {
-            map = getMap();
-        } else {
-            map = mapFragment.getMap();
-        }
-
+        map = getMap();
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(48.35, 31.16), 5.5f));
         map.getUiSettings().setRotateGesturesEnabled(false);
@@ -184,7 +176,7 @@ public class MapFragment
 
     @Override
     public boolean onMarkerClick(final Marker marker) {
-        GoogleMap map = getMap();
+       // GoogleMap map = getMap();
         Projection projection = map.getProjection();
         trackedPosition = marker.getPosition();
         Point trackedPoint = projection.toScreenLocation(trackedPosition);
