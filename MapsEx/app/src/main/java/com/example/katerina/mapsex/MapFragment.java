@@ -117,6 +117,7 @@ public class MapFragment
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(48.35, 31.16), 5.5f));
         map.getUiSettings().setRotateGesturesEnabled(false);
+        map.setMyLocationEnabled(true);
         map.setOnMapClickListener(this);
         map.setOnMarkerClickListener(this);
         map.setOnMapLongClickListener(this);
