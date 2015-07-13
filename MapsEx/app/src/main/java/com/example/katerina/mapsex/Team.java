@@ -11,7 +11,7 @@ public class Team {
     public String num_players;
     public String name;
     public ArrayList<User> arr_players;
-
+    public Team(){}
     public Team(String id,String name){
         this.id = id;
         this.name = name;

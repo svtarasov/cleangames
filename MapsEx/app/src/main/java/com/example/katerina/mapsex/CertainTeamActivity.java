@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 public class CertainTeamActivity extends ActionBarActivity {
-
+    public CertainTeamAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,10 @@ public class CertainTeamActivity extends ActionBarActivity {
                 startActivity(new Intent(CertainTeamActivity.this, DemoActivity.class));
             }
         });
+        final ListView listViewUsers = (ListView) findViewById(R.id.listUsers);
+        ArrayList<User> exampleList = Repository.getUsers(new Team());
+        mAdapter = new CertainTeamAdapter(this,exampleList);
+        listViewUsers.setAdapter(mAdapter);
     }
 
     @Override

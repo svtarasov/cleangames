@@ -34,11 +34,7 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
         setTitle("Teams in game : " + str);
 
         final ListView listViewTeams = (ListView) findViewById(R.id.listTeams);
-        // listViewTeams.getSelectedItem()
-        ArrayList<Team> exampleList = new ArrayList<Team>();
-        exampleList.add(new Team("1", "something"));
-        exampleList.add(new Team("2", "anything"));
-        exampleList.add(new Team("3", "nothing"));
+        ArrayList<Team> exampleList = Repository.getTeams(new Game());
         mAdapter = new TeamsAdapter(this, exampleList);
         listViewTeams.setAdapter(mAdapter);
         listViewTeams.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -79,7 +79,7 @@ public class Game {
     }
 
 
-
+    Game(){}
 
     Game(String ID,String name){
         this.ID=ID;

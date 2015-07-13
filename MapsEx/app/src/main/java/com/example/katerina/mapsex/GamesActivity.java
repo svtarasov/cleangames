@@ -23,10 +23,7 @@ public class GamesActivity extends ActionBarActivity {
 
         final ListView listViewGames = (ListView) findViewById(R.id.listGames);
         // listViewTeams.getSelectedItem()
-        ArrayList<Game> exampleList = new ArrayList<Game>();
-        exampleList.add(new Game("1", "Clean Peterhof1"));
-        exampleList.add(new Game("2", "Clean Peterhof2"));
-        exampleList.add(new Game("3", "nothing"));
+        ArrayList<Game> exampleList = Repository.getGames();
         mAdapter = new GamesAdapter(this,exampleList);
         listViewGames.setAdapter(mAdapter);
         listViewGames.setOnItemClickListener(new AdapterView.OnItemClickListener() {
