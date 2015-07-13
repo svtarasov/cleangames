@@ -83,10 +83,14 @@ public class Game {
 
 
 
+
     Game(String ID,String name, LatLng start_point){
         this(ID,name);
         this.start_point=start_point;
     }
+
+
+    Game(){}
 
 
     Game(String ID,String name){

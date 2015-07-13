@@ -107,7 +107,18 @@ public class MapFragment
         containerMap.addView(mapView, new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT));
         map = getMap();
 
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(48.35, 31.16), 5.5f));
+        //Установка маркера штаба и перемещение карты на его расположение
+        GameProvider provider= GameProvider.Initialize(new Game(),false);
+        Game game = provider.getGame();
+        LatLng start=game.start_point;
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(start, 5.5f));
+        final MarkerOptions markerOptions = new MarkerOptions();
+
+        markerOptions.position(start);
+        markerOptions.title(start.latitude + " : " + start.longitude);
+        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.timon);
+        Marker m =   map.addMarker(markerOptions.icon(icon));
+
         map.getUiSettings().setRotateGesturesEnabled(false);
         map.setMyLocationEnabled(true);
         map.setOnMapClickListener(this);
