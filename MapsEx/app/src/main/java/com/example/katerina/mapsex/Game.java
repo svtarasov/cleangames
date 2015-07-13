@@ -18,6 +18,68 @@ public class Game {
     public ArrayList<Location> base_loc;
     public ArrayList<Param> parameters;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Time getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(Time start_time) {
+        this.start_time = start_time;
+    }
+
+    public Time getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(Time end_time) {
+        this.end_time = end_time;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ArrayList<Location> getBase_loc() {
+        return base_loc;
+    }
+
+    public void setBase_loc(ArrayList<Location> base_loc) {
+        this.base_loc = base_loc;
+    }
+
+    public ArrayList<Param> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(ArrayList<Param> parameters) {
+        this.parameters = parameters;
+    }
+
+
+
 
     Game(String ID,String name){
         this.ID=ID;

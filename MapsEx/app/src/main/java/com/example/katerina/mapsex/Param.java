@@ -9,4 +9,41 @@ public class Param {
     public int amount;
     public Game project;
     public int price;
+    public int getID() {
+        return ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public Game getProject() {
+        return project;
+    }
+
+    public void setProject(Game project) {
+        this.project = project;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+
 }
