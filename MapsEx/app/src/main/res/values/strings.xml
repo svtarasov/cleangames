@@ -24,5 +24,6 @@
     <string name="title_activity_certain_team">CertainTeamActivity</string>
     <string name="title_activity_games">GamesActivity</string>
     <string name="title_activity_new_team">New Team Activity</string>
+    <string name="title_activity_rating">RatingActivity</string>
 
 </resources>

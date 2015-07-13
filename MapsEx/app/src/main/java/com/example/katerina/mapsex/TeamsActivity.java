@@ -87,7 +87,7 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
                 startActivity(new Intent(TeamsActivity.this, DemoActivity.class));
                 return true;
             case R.id.rating_menu:
-                Toast.makeText(this, "You chose Rating", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(TeamsActivity.this, RatingActivity.class));
                 return true;
         }
         return true;

@@ -11,10 +11,26 @@ public class Team {
     public String num_players;
     public String name;
     public ArrayList<User> arr_players;
+    public int total_scores;
+
+
+    public int getTotal_scores() {
+        return total_scores;
+    }
+
+    public void setTotal_scores(int total_scores) {
+        this.total_scores = total_scores;
+    }
+
     public Team(){}
     public Team(String id,String name){
         this.id = id;
         this.name = name;
+    }
+    public Team(String id, String name, int scores){
+        this.id = id;
+        this.name = name;
+        this.total_scores = scores;
     }
 
     public String getId() {

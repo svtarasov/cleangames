@@ -30,7 +30,11 @@ public class Repository {
         return exampleList;
 
     }
-    public static void getRating(Game game){
-
+    public static ArrayList<Team> getRating(Game game){
+        ArrayList<Team> exampleList = new ArrayList<Team>();
+        exampleList.add(new Team("1", "Sun", 39));
+        exampleList.add(new Team("2", "Beatles", 28));
+        exampleList.add(new Team("3", "Three in the garbage", 1));
+        return exampleList;
     }
 }
