@@ -2,6 +2,8 @@ package com.example.katerina.mapsex;
 
 import android.text.format.Time;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,6 +17,7 @@ public class Game {
     public Time start_time;
     public Time end_time;
     public String description;
+    public LatLng start_point;
     public ArrayList<Location> base_loc;
     public ArrayList<Param> parameters;
 
@@ -79,6 +82,11 @@ public class Game {
     }
 
 
+
+    Game(String ID,String name, LatLng start_point){
+        this(ID,name);
+        this.start_point=start_point;
+    }
 
 
     Game(String ID,String name){
