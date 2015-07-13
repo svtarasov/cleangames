@@ -1,35 +1,60 @@
 package com.example.katerina.mapsex;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import org.apache.http.NameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
-public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenuItemClickListener {
+public class TeamsActivity extends ActionBarActivity {
 
     public TeamsAdapter mAdapter;
+    private ProgressDialog pDialog;
+
+    JSONParser jParser = new JSONParser();
+
+    JSONArray teams = null;
+
+    ArrayList<HashMap<String, String>> teamsList;
+
+    private static final String url_all_teams = "";
+
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_TEAMS = "teams";
+    private static final String TAG_ID = "id";
+    private static final String TAG_NAME = "name";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teams);
         Bundle extras = getIntent().getExtras();
-        String str;
-        if (extras == null) {
-            str = null;
+        String str ;
+        if(extras == null) {
+            str= null;
         } else {
-            str = extras.getString("Name");
+            str= extras.getString("Name");
         }
         setTitle("Teams in game : " + str);
 
@@ -39,7 +64,7 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
         exampleList.add(new Team("1", "something"));
         exampleList.add(new Team("2", "anything"));
         exampleList.add(new Team("3", "nothing"));
-        mAdapter = new TeamsAdapter(this, exampleList);
+        mAdapter = new TeamsAdapter(this,exampleList);
         listViewTeams.setAdapter(mAdapter);
         listViewTeams.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -57,47 +82,7 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
                 startActivity(new Intent(TeamsActivity.this, NewTeamActivity.class));
             }
         });
-
-        findViewById(R.id.button_popup)
-                //Следим за нажатиями по кнопке:
-                .setOnClickListener(new View.OnClickListener() {
-
-                    //Обрабатываем нажатие кнопки Button:
-                    @Override
-                    public void onClick(View view) {
-                        //Вызываем popup меню, заполняем его с файла popup.xml и настраиваем
-                        //слушатель нажатий по пунктам OnMenuItemClickListener:
-                        PopupMenu popup_menu = new PopupMenu(TeamsActivity.this, view);
-                        popup_menu.setOnMenuItemClickListener(TeamsActivity.this);
-                        popup_menu.inflate(R.menu.popup_menu);
-                        popup_menu.show();
-                    }
-                });
     }
-
-    //Обрабатываем нажатия по пунктам popup меню, ссылаясь на id каждого пункта, заданные в файле popup.xml:
-    public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.game_menu:
-                //Toast.makeText(this, "Выбран пункт 1", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(TeamsActivity.this, GamesActivity.class));
-                return true;
-            case R.id.teams_menu:
-                //Toast.makeText(this, "Выбран пункт 2", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(TeamsActivity.this, TeamsActivity.class));
-                return true;
-            case R.id.map_menu:
-                //Toast.makeText(this, "Выбран пункт 3", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(TeamsActivity.this, DemoActivity.class));
-                return true;
-            case R.id.rating_menu:
-                Toast.makeText(this, "You chose Rating", Toast.LENGTH_SHORT).show();
-                return true;
-        }
-        return true;
-    }
-
-
 
 
     @Override
@@ -126,5 +111,71 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    class LoadAllTeams extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(TeamsActivity.this);
+            pDialog.setMessage("Loading products. Please wait...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        protected String doInBackground(String... args) {
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            JSONObject json = jParser.makeHttpRequest(url_all_teams, "GET", params);//(пока нет парсера)
+
+            Log.d("All Teams: ", json.toString());
+
+            try {
+                int success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    teams = json.getJSONArray(TAG_TEAMS);
+
+                    for (int i = 0; i < teams.length(); i++) {
+                        JSONObject c = teams.getJSONObject(i);
+
+                        String id = c.getString(TAG_ID);
+                        String name = c.getString(TAG_NAME);
+
+                        HashMap<String, String> map = new HashMap<String, String>();
+
+                        map.put(TAG_ID, id);
+                        map.put(TAG_NAME, name);
+
+                        teamsList.add(map);
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog after getting all products
+            pDialog.dismiss();
+            // updating UI from Background Thread
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    /**
+                     * Updating parsed JSON data into ListView
+                     * */
+                    ListAdapter adapter = new SimpleAdapter(
+                            TeamsActivity.this, teamsList,
+                            R.layout.row_game, new String[] { TAG_ID,
+                            TAG_NAME},
+                            new int[] { R.id.gameId, R.id.gameName });
+                    // updating listview
+                    setListAdapter(adapter);
+                }
+            });
+        }
     }
 }
