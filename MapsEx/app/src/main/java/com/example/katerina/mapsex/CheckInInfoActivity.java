@@ -44,6 +44,7 @@ public class CheckInInfoActivity extends Activity{
 
 
 
+
             }
 
 

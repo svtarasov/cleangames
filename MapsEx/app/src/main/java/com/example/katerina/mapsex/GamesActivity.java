@@ -1,46 +1,19 @@
 package com.example.katerina.mapsex;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
 
 
 public class GamesActivity extends ActionBarActivity {
-    private ProgressDialog pDialog;
 
-    JSONParser jParser = new JSONParser();//(пока нет парсера)
-
-    ArrayList<HashMap<String, String>> gamesList;
-
-    private static final String url_all_games = "";
-
-    private static final String TAG_SUCCESS = "success";
-    private static final String TAG_GAMES = "games";
-    private static final String TAG_ID = "id";
-    private static final String TAG_NAME = "name";
-
-    JSONArray games = null;
     public GamesAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +21,7 @@ public class GamesActivity extends ActionBarActivity {
         setContentView(R.layout.activity_games);
         setTitle("Games");
 
-        ListView listViewGames = (ListView) findViewById(R.id.listGames);
-
+        final ListView listViewGames = (ListView) findViewById(R.id.listGames);
         // listViewTeams.getSelectedItem()
         ArrayList<Game> exampleList = new ArrayList<Game>();
         exampleList.add(new Game("1", "Clean Peterhof1"));
@@ -89,70 +61,5 @@ public class GamesActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-    class LoadAllGames extends AsyncTask<String, String, String> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(GamesActivity.this);
-            pDialog.setMessage("Loading products. Please wait...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
-
-        protected String doInBackground(String... args) {
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            JSONObject json = jParser.makeHttpRequest(url_all_games, "GET", params);
-
-            Log.d("All Games: ", json.toString());
-
-            try {
-                int success = json.getInt(TAG_SUCCESS);
-                if (success == 1) {
-                    games = json.getJSONArray(TAG_GAMES);
-
-                    for (int i = 0; i < games.length(); i++) {
-                        JSONObject c = games.getJSONObject(i);
-
-                        String id = c.getString(TAG_ID);
-                        String name = c.getString(TAG_NAME);
-
-                        HashMap<String, String> map = new HashMap<String, String>();
-
-                        map.put(TAG_ID, id);
-                        map.put(TAG_NAME, name);
-
-                        gamesList.add(map);
-                    }
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-
-        protected void onPostExecute(String file_url) {
-            // dismiss the dialog after getting all games
-            pDialog.dismiss();
-            // updating UI from Background Thread
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    /**
-                     * Updating parsed JSON data into ListView
-                     * */
-                    ListAdapter adapter = new SimpleAdapter(
-                            GamesActivity.this, gamesList,
-                            R.layout.row_game, new String[]{TAG_ID,
-                            TAG_NAME},
-                            new int[]{R.id.gameId, R.id.gameName});
-                    // updating listview
-                    setListAdapter(adapter);
-                }
-            });
-        }
     }
 }
