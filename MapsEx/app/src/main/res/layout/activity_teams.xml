@@ -14,6 +14,14 @@
         android:id="@+id/teamslayout"
         android:weightSum="1">
 
+        <ImageButton
+            android:layout_width="42dp"
+            android:layout_height="30dp"
+            android:id="@+id/button_popup"
+            android:layout_gravity="left|center_horizontal"
+            android:background="@drawable/menu_button"
+            android:layout_weight="0.07" />
+
 
         <ListView
             android:layout_width="337dp"
@@ -30,6 +38,7 @@
             android:id="@+id/buttonCreateTeam"
             android:layout_gravity="left|bottom"
             android:clickable="true" />
+
 
     </LinearLayout>
 

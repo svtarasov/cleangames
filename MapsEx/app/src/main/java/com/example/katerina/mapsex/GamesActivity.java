@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.katerina.mapsex.datamodels.Game;
+
 import java.util.ArrayList;
 
 
@@ -23,10 +25,7 @@ public class GamesActivity extends ActionBarActivity {
 
         final ListView listViewGames = (ListView) findViewById(R.id.listGames);
         // listViewTeams.getSelectedItem()
-        ArrayList<Game> exampleList = new ArrayList<Game>();
-        exampleList.add(new Game("1", "Clean Peterhof1"));
-        exampleList.add(new Game("2", "Clean Peterhof2"));
-        exampleList.add(new Game("3", "nothing"));
+        ArrayList<Game> exampleList = Repository.getGames();
         mAdapter = new GamesAdapter(this,exampleList);
         listViewGames.setAdapter(mAdapter);
         listViewGames.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -34,7 +33,7 @@ public class GamesActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(GamesActivity.this, TeamsActivity.class);
                 Game game = (Game) parent.getItemAtPosition(position);
-
+                GameProvider provaider= GameProvider.Initialize(game,true);
                 intent.putExtra("Name", game.name);
                 startActivity(intent);
             }

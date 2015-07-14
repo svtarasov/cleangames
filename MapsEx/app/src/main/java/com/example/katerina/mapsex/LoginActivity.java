@@ -100,7 +100,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     public void onClick_demo (View view) {
-        Intent intent = new Intent (LoginActivity.this, DemoActivity.class);
+        Intent intent = new Intent (LoginActivity.this, GamesActivity.class);
         startActivity(intent);
     }
     private void populateAutoComplete() {
