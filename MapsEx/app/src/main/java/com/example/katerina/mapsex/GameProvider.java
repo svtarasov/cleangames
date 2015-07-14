@@ -1,12 +1,14 @@
 package com.example.katerina.mapsex;
 
+import com.example.katerina.mapsex.datamodels.Game;
+
 /**
  * Created by 1 on 10.07.2015.
  */
 public class GameProvider {
 
     private static GameProvider instance;
-    private static Game  game;
+    private static Game game;
     private GameProvider(Game game){
         this.game=game;
     }

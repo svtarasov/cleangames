@@ -1,6 +1,8 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.datamodels;
 
 import android.text.format.Time;
+
+import com.example.katerina.mapsex.datamodels.Team;
 
 /**
  * Created by Katerina on 06.07.2015.

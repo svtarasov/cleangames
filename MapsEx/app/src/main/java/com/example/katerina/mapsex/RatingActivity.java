@@ -6,6 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.example.katerina.mapsex.datamodels.Game;
+import com.example.katerina.mapsex.datamodels.Team;
+
 import java.util.ArrayList;
 
 

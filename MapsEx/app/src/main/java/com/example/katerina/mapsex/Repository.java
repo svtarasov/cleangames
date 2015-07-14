@@ -1,5 +1,8 @@
 package com.example.katerina.mapsex;
 
+import com.example.katerina.mapsex.datamodels.Game;
+import com.example.katerina.mapsex.datamodels.Team;
+import com.example.katerina.mapsex.datamodels.User;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;

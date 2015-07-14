@@ -1,4 +1,4 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.datamodels;
 
 
 import java.util.ArrayList;

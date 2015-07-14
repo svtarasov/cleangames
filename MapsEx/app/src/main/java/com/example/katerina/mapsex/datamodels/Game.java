@@ -1,4 +1,4 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.datamodels;
 
 import android.text.format.Time;
 
@@ -84,7 +84,7 @@ public class Game {
 
 
 
-    Game(String ID,String name, LatLng start_point){
+    public Game(String ID, String name, LatLng start_point){
         this(ID,name);
         this.start_point=start_point;
     }
@@ -94,7 +94,7 @@ public class Game {
 
     }
 
-    Game(){}
+    public Game(){}
 
 
     Game(String ID,String name){

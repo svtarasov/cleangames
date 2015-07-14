@@ -1,4 +1,4 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.datamodels;
 
 import com.google.android.gms.maps.model.LatLng;
 
