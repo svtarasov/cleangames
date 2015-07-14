@@ -7,7 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.example.katerina.mapsex.datamodels.Team;
+import com.example.katerina.mapsex.datamodels.User;
 
 import java.util.ArrayList;
 
