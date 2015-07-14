@@ -24,9 +24,25 @@ public class Repository {
     }
     public static ArrayList<Game> getGames(){
         ArrayList<Game> exampleList = new ArrayList<Game>();
-        exampleList.add(new Game("1", "Clean Peterhof1", new LatLng(48.35, 31.16)));
+        ArrayList<Location> loc=new ArrayList<>();
+        loc.add(new Location("Base", LocationRole.BASE ,new LatLng(48.35, 31.16)));
+        loc.add(new Location("Ware1", LocationRole.WAREHOUSE ,new LatLng(49.35, 32.16)));
+        loc.add(new Location("Ware2", LocationRole.WAREHOUSE ,new LatLng(47.35, 30.16)));
+      /*  exampleList.add(new Game("1", "Clean Peterhof1", new LatLng(48.35, 31.16)));
         exampleList.add(new Game("2", "Clean Peterhof2",new LatLng(8.35, 15.16)));
-        exampleList.add(new Game("3", "Clean Cupchino",new LatLng(20.35, 20.16)));
+        exampleList.add(new Game("3", "Clean Cupchino",new LatLng(20.35, 20.16)));*/
+        exampleList.add(new Game("1", "Clean Peterhof1", loc));
+        loc.clear();
+        loc.add(new Location("Base", LocationRole.BASE ,new LatLng(8.35, 15.16)));
+        loc.add(new Location("Ware1", LocationRole.WAREHOUSE ,new LatLng(10.35, 14.16)));
+        loc.add(new Location("Ware2", LocationRole.WAREHOUSE, new LatLng(11.35, 14.76)));
+        exampleList.add(new Game("2", "Clean Peterhof2", loc));
+        loc.clear();
+        loc.add(new Location("Base", LocationRole.BASE ,new LatLng(20.35, 20.16)));
+        loc.add(new Location("Ware1", LocationRole.WAREHOUSE ,new LatLng(21.35, 19.16)));
+        loc.add(new Location("Ware2", LocationRole.WAREHOUSE, new LatLng(20.05, 21.16)));
+        exampleList.add(new Game("3", "Clean Cupchino",loc));
+
         return exampleList;
 
     }

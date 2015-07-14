@@ -9,6 +9,7 @@ public class Location {
     public int ID;
     public int project_ID;
     public String name;
+    public LocationRole role;
     public LatLng loc;
 
     public int getID() {
@@ -27,6 +28,9 @@ public class Location {
         return name;
     }
 
+    public LocationRole getRole() {
+        return role;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -38,6 +42,13 @@ public class Location {
     public void setLoc(LatLng loc) {
         this.loc = loc;
     }
+
+    Location(String name, LocationRole role,LatLng loc ){
+        this.name=name;
+        this.role=role;
+        this.loc=loc;
+    }
+
 
 
 }

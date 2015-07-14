@@ -22,6 +22,7 @@ import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.*;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +48,7 @@ public class MapFragment
     //длительность анимации перемещения карты
     private static final int ANIMATION_DURATION = 500;
 
-    private Map<Marker, CheckIn> spots, spotsPrevious;
+    private Map<Marker, CheckIn> spots;
     private   GoogleMap map;
     //точка на карте, соответственно перемещению которой перемещается всплывающее окно
     private LatLng trackedPosition;
@@ -108,7 +109,10 @@ public class MapFragment
         map = getMap();
 
         //Установка маркера штаба и перемещение карты на его расположение
-        GameProvider provider= GameProvider.Initialize(new Game(),false);
+        markerInitializer();
+
+
+      /*  GameProvider provider= GameProvider.Initialize(new Game(),false);
         Game game = provider.getGame();
         LatLng start=game.start_point;
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(start, 5.5f));
@@ -117,7 +121,8 @@ public class MapFragment
         markerOptions.position(start);
         markerOptions.title(start.latitude + " : " + start.longitude);
         BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.timon);
-        Marker m =   map.addMarker(markerOptions.icon(icon));
+
+        Marker m =   map.addMarker(markerOptions.icon(icon));*/
 
         map.getUiSettings().setRotateGesturesEnabled(false);
         map.setMyLocationEnabled(true);
@@ -186,8 +191,9 @@ public class MapFragment
 
 
     @Override
-    public boolean onMarkerClick(final Marker marker) {
-       // GoogleMap map = getMap();
+    public boolean onMarkerClick(Marker marker) {
+
+        final Marker temp=marker;
         Projection projection = map.getProjection();
         trackedPosition = marker.getPosition();
         Point trackedPoint = projection.toScreenLocation(trackedPosition);
@@ -195,21 +201,24 @@ public class MapFragment
         LatLng newCameraLocation = projection.fromScreenLocation(trackedPoint);
         map.animateCamera(CameraUpdateFactory.newLatLng(newCameraLocation), ANIMATION_DURATION, null);
 
-        CheckIn spot = spots.get(marker);
-        textView.setText(spot.getName());
-        myImageView.setImageResource(R.drawable.hellokitty);
+        if (!spots.containsKey(marker)) { infoWindowContainer.setVisibility(INVISIBLE); return false;}
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                spots.remove(marker);
-                marker.remove();
-                infoWindowContainer.setVisibility(INVISIBLE);
+            CheckIn spot = spots.get(marker);
+            textView.setText(spot.getName());
+            myImageView.setImageResource(R.drawable.hellokitty);
 
-            }
-        });
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    spots.remove(temp);
+                    temp.remove();
+                    infoWindowContainer.setVisibility(INVISIBLE);
 
-        infoWindowContainer.setVisibility(VISIBLE);
+                }
+            });
+
+            infoWindowContainer.setVisibility(VISIBLE);
+
 
         return true;
     }
@@ -310,4 +319,36 @@ public class MapFragment
             }
         }
     }
+
+    private void markerInitializer(){
+        GameProvider provider= GameProvider.Initialize(new Game(), false);
+        Game game = provider.getGame();
+
+        ArrayList<Location> locations=game.base_loc;
+        for (int i=0;i<locations.size();i++) {
+            Location location=locations.get(i);
+            LatLng point=location.getLoc();
+             switch(location.getRole()){
+                 case BASE: {
+                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 5.5f));
+                     BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.timon);
+                     final MarkerOptions markerOptions = new MarkerOptions();
+                     markerOptions.position(point);
+                     markerOptions.title(point.latitude + " : " + point.longitude);
+                     Marker m = map.addMarker(markerOptions.icon(icon));
+                     break;
+                 }
+                 case WAREHOUSE:{
+                     BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.timon);
+                     final MarkerOptions markerOptions = new MarkerOptions();
+                     markerOptions.position(point);
+                     markerOptions.title(point.latitude + " : " + point.longitude);
+                     Marker m = map.addMarker(markerOptions.icon(icon));
+                     break;
+                 }
+             }
+
+        }
+    }
+
 }
