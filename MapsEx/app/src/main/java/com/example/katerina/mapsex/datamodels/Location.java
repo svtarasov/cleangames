@@ -43,7 +43,7 @@ public class Location {
         this.loc = loc;
     }
 
-    Location(String name, LocationRole role,LatLng loc ){
+    public Location(String name, LocationRole role,LatLng loc ){
         this.name=name;
         this.role=role;
         this.loc=loc;
