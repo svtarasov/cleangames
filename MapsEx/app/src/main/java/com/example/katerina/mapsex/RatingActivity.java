@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import android.widget.AdapterView;
+
 import android.widget.ListView;
 import android.widget.PopupMenu;
 
@@ -16,43 +18,30 @@ import com.example.katerina.mapsex.datamodels.Team;
 import java.util.ArrayList;
 
 
-public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenuItemClickListener {
+public class RatingActivity extends ActionBarActivity {
 
-    public TeamsAdapter mAdapter;
-
+    public RatingAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teams);
-        Bundle extras = getIntent().getExtras();
-        String str;
-        if (extras == null) {
-            str = null;
-        } else {
-            str = extras.getString("Name");
-        }
-        setTitle("Teams in game : " + str);
+        setContentView(R.layout.activity_rating);
+        setTitle("Rating:");
+        final ListView listViewRating = (ListView) findViewById(R.id.listRating);
+        final ArrayList<Team> exampleList = Repository.getRating(new Game());
+        mAdapter = new RatingAdapter(this, exampleList);
+        listViewRating.setAdapter(mAdapter);
 
-        final ListView listViewTeams = (ListView) findViewById(R.id.listTeams);
-        ArrayList<Team> exampleList = Repository.getTeams(new Game());
-        mAdapter = new TeamsAdapter(this, exampleList);
-        listViewTeams.setAdapter(mAdapter);
-        listViewTeams.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewRating.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(TeamsActivity.this, CertainTeamActivity.class);
+                Intent intent = new Intent(RatingActivity.this, AdminGarbageTransferActivity.class);
                 Team team = (Team) parent.getItemAtPosition(position);
-
-                intent.putExtra("Name", team.name);
+                intent.putExtra("name",team.getName() );
+                intent.putExtra("score",team.getTotal_scores());
                 startActivity(intent);
             }
         });
-        findViewById(R.id.buttonCreateTeam).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(TeamsActivity.this, NewTeamActivity.class));
-            }
-        });
+
 
         findViewById(R.id.button_popup)
                 //Следим за нажатиями по кнопке:
@@ -63,8 +52,29 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
                     public void onClick(View view) {
                         //Вызываем popup меню, заполняем его с файла popup.xml и настраиваем
                         //слушатель нажатий по пунктам OnMenuItemClickListener:
-                        PopupMenu popup_menu = new PopupMenu(TeamsActivity.this, view);
-                        popup_menu.setOnMenuItemClickListener(TeamsActivity.this);
+                        PopupMenu popup_menu = new PopupMenu(RatingActivity.this, view);
+                        popup_menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            public boolean onMenuItemClick(MenuItem item) {
+                                switch (item.getItemId()) {
+                                    case R.id.game_menu:
+                                        //Toast.makeText(this, "Выбран пункт 1", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(RatingActivity.this, GamesActivity.class));
+                                        return true;
+                                    case R.id.teams_menu:
+                                        //Toast.makeText(this, "Выбран пункт 2", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(RatingActivity.this, TeamsActivity.class));
+                                        return true;
+                                    case R.id.map_menu:
+                                        //Toast.makeText(this, "Выбран пункт 3", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(RatingActivity.this, DemoActivity.class));
+                                        return true;
+                                    case R.id.rating_menu:
+                                        startActivity(new Intent(RatingActivity.this, RatingActivity.class));
+                                        return true;
+                                }
+                                return true;
+                            }
+                        });
                         popup_menu.inflate(R.menu.popup_menu);
                         popup_menu.show();
                     }
@@ -76,38 +86,31 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
         switch (item.getItemId()) {
             case R.id.game_menu:
                 //Toast.makeText(this, "Выбран пункт 1", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(TeamsActivity.this, GamesActivity.class));
+                startActivity(new Intent(RatingActivity.this, GamesActivity.class));
                 return true;
             case R.id.teams_menu:
                 //Toast.makeText(this, "Выбран пункт 2", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(TeamsActivity.this, TeamsActivity.class));
+                startActivity(new Intent(RatingActivity.this, TeamsActivity.class));
                 return true;
             case R.id.map_menu:
                 //Toast.makeText(this, "Выбран пункт 3", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(TeamsActivity.this, DemoActivity.class));
+                startActivity(new Intent(RatingActivity.this, DemoActivity.class));
                 return true;
             case R.id.rating_menu:
-                startActivity(new Intent(TeamsActivity.this, RatingActivity.class));
+                startActivity(new Intent(RatingActivity.this, RatingActivity.class));
                 return true;
         }
         return true;
+
     }
-
-
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_teams, menu);
+        getMenuInflater().inflate(R.menu.menu_rating, menu);
         return true;
     }
-
-/*    public void button2OnClick(View view){
-        Intent intent1 = new Intent(TeamsActivity.this, MapsActivity.class);
-        startActivity(intent1);
-    }
-    */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
