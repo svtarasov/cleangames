@@ -1,6 +1,7 @@
 package com.example.katerina.mapsex;
 
 import com.example.katerina.mapsex.datamodels.Game;
+import com.example.katerina.mapsex.datamodels.Location;
 import com.example.katerina.mapsex.datamodels.LocationRole;
 import com.example.katerina.mapsex.datamodels.Team;
 import com.example.katerina.mapsex.datamodels.User;

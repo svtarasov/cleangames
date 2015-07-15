@@ -44,7 +44,9 @@ public class Location {
         this.loc = loc;
     }
 
+
    public Location(String name, LocationRole role,LatLng loc ){
+
         this.name=name;
         this.role=role;
         this.loc=loc;
