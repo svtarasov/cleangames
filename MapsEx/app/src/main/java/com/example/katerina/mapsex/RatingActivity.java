@@ -1,9 +1,12 @@
 package com.example.katerina.mapsex;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.katerina.mapsex.datamodels.Game;
@@ -21,9 +24,20 @@ public class RatingActivity extends ActionBarActivity {
         setContentView(R.layout.activity_rating);
         setTitle("Rating:");
         final ListView listViewRating = (ListView) findViewById(R.id.listRating);
-        ArrayList<Team> exampleList = Repository.getRating(new Game());
+        final ArrayList<Team> exampleList = Repository.getRating(new Game());
         mAdapter = new RatingAdapter(this, exampleList);
         listViewRating.setAdapter(mAdapter);
+        listViewRating.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(RatingActivity.this, AdminGarbageTransferActivity.class);
+                Team team = (Team) parent.getItemAtPosition(position);
+                intent.putExtra("name",team.getName() );
+                intent.putExtra("score",team.getTotal_scores());
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
