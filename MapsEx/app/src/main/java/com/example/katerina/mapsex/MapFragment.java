@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.example.katerina.mapsex.datamodels.*;
 
 import com.example.katerina.mapsex.datamodels.CheckIn;
 import com.example.katerina.mapsex.datamodels.Game;
@@ -334,16 +335,16 @@ public class MapFragment
              switch(location.getRole()){
                  case BASE: {
                      map.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 5.5f));
-                     BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.timon);
-                     final MarkerOptions markerOptions = new MarkerOptions();
+                     BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.base);
+                     MarkerOptions markerOptions = new MarkerOptions();
                      markerOptions.position(point);
                      markerOptions.title(point.latitude + " : " + point.longitude);
                      Marker m = map.addMarker(markerOptions.icon(icon));
                      break;
                  }
                  case WAREHOUSE:{
-                     BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.timon);
-                     final MarkerOptions markerOptions = new MarkerOptions();
+                     BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.warehouse);
+                     MarkerOptions markerOptions = new MarkerOptions();
                      markerOptions.position(point);
                      markerOptions.title(point.latitude + " : " + point.longitude);
                      Marker m = map.addMarker(markerOptions.icon(icon));

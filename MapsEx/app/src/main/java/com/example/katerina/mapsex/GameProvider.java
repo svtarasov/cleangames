@@ -22,12 +22,12 @@ public class GameProvider {
                return instance;
 
 
-            else instance = new GameProvider(game);
+            else { instance = new GameProvider(game);return instance;}
 
 
 
 
-        return instance;
+
     }
 
     public Game getGame(){
