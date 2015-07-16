@@ -24,14 +24,10 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teams);
-        Bundle extras = getIntent().getExtras();
-        String str;
-        if (extras == null) {
-            str = null;
-        } else {
-            str = extras.getString("Name");
-        }
-        setTitle("Teams in game : " + str);
+
+        GameProvider provider= GameProvider.Initialize(new Game());
+        Game game = provider.getGame();
+        setTitle("Teams in game : " + game.name);
 
         final ListView listViewTeams = (ListView) findViewById(R.id.listTeams);
         ArrayList<Team> exampleList = Repository.getTeams(new Game());
