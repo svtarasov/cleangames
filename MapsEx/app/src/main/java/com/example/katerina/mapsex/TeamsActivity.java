@@ -65,7 +65,7 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
                         //слушатель нажатий по пунктам OnMenuItemClickListener:
                         PopupMenu popup_menu = new PopupMenu(TeamsActivity.this, view);
                         popup_menu.setOnMenuItemClickListener(TeamsActivity.this);
-                        popup_menu.inflate(R.menu.popup_menu);
+                        popup_menu.inflate(R.menu.popup_menu_team);
                         popup_menu.show();
                     }
                 });
@@ -77,10 +77,6 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
             case R.id.game_menu:
                 //Toast.makeText(this, "Выбран пункт 1", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(TeamsActivity.this, GamesActivity.class));
-                return true;
-            case R.id.teams_menu:
-                //Toast.makeText(this, "Выбран пункт 2", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(TeamsActivity.this, TeamsActivity.class));
                 return true;
             case R.id.map_menu:
                 //Toast.makeText(this, "Выбран пункт 3", Toast.LENGTH_SHORT).show();

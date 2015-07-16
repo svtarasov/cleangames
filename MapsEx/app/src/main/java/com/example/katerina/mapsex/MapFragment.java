@@ -8,17 +8,22 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import com.example.katerina.mapsex.datamodels.*;
 
 import com.example.katerina.mapsex.datamodels.CheckIn;
 import com.example.katerina.mapsex.datamodels.Game;
+import com.example.katerina.mapsex.datamodels.Location;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;
@@ -89,8 +94,8 @@ public class MapFragment
         spots = new HashMap<>();
         markerHeight = getResources().getDrawable(R.drawable.pin).getIntrinsicHeight();
 
-
     }
+
 
 
     @Override
@@ -98,14 +103,7 @@ public class MapFragment
 
         View rootView = inflater.inflate(R.layout.activity_map_fragment, null);
         delete=(Button) rootView.findViewById(R.id.delete);
-        Button button1 = (Button) rootView.findViewById(R.id.button7);
-        button1.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(new Intent(getActivity(), GamesActivity.class));
-                startActivity(intent);
-            }
-        });
+
         FrameLayout containerMap = (FrameLayout) rootView.findViewById(R.id.container_map);
         View mapView = super.onCreateView(inflater, container, savedInstanceState);
         containerMap.addView(mapView, new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT));
@@ -133,27 +131,69 @@ public class MapFragment
         map.setOnMarkerClickListener(this);
         map.setOnMapLongClickListener(this);
 
+       /* Button button1 = (Button) rootView.findViewById(R.id.button7);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(new Intent(getActivity(), GamesActivity.class));
+                startActivity(intent);
+            }
+        });*/
+        ImageButton popup_men = (ImageButton) rootView.findViewById(R.id.button_popup);
+        popup_men.setOnClickListener(new View.OnClickListener() {
+
+            //Обрабатываем нажатие кнопки Button:
+            @Override
+            public void onClick(View view) {
+                //Вызываем popup меню, заполняем его с файла popup.xml и настраиваем
+                //слушатель нажатий по пунктам OnMenuItemClickListener:
+                PopupMenu popup_menu = new PopupMenu(getActivity(), view);
+                popup_menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.game_menu:
+                              //Toast.makeText(this, "Выбран пункт 1", Toast.LENGTH_SHORT).show();
+                              startActivity(new Intent(getActivity(), GamesActivity.class));
+                              return true;
+                        case R.id.teams_menu:
+                              //Toast.makeText(this, "Выбран пункт 2", Toast.LENGTH_SHORT).show();
+                              startActivity(new Intent(getActivity(), TeamsActivity.class));
+                              return true;
+                        case R.id.rating_menu:
+                              startActivity(new Intent(getActivity(), RatingActivity.class));
+                              return true;
+                      }
+                    return true;
+                  }
+              });
+                    popup_menu.inflate(R.menu.popup_menu_map);
+                    popup_menu.show();
+                }
+            });
+
+    infoWindowContainer = rootView.findViewById(R.id.container_popup);
+    //подписываемся на изменения размеров всплывающего окна
+    infoWindowLayoutListener = new InfoWindowLayoutListener();
+    infoWindowContainer.getViewTreeObserver().addOnGlobalLayoutListener(infoWindowLayoutListener);
+    overlayLayoutParams = (AbsoluteLayout.LayoutParams) infoWindowContainer.getLayoutParams();
+
+    textView = (TextView) infoWindowContainer.findViewById(R.id.textview_title);
+    myImageView = (ImageView)infoWindowContainer.findViewById(R.id.imageView);
+    //  button = (TextView) infoWindowContainer.findViewById(R.id.button_view_article);
+    // button.setOnClickListener(this);
 
 
+    return rootView;
+}
 
-
-        infoWindowContainer = rootView.findViewById(R.id.container_popup);
-        //подписываемся на изменения размеров всплывающего окна
-        infoWindowLayoutListener = new InfoWindowLayoutListener();
-        infoWindowContainer.getViewTreeObserver().addOnGlobalLayoutListener(infoWindowLayoutListener);
-        overlayLayoutParams = (AbsoluteLayout.LayoutParams) infoWindowContainer.getLayoutParams();
-
-        textView = (TextView) infoWindowContainer.findViewById(R.id.textview_title);
-        myImageView = (ImageView)infoWindowContainer.findViewById(R.id.imageView);
-      //  button = (TextView) infoWindowContainer.findViewById(R.id.button_view_article);
-       // button.setOnClickListener(this);
-
-
-        return rootView;
-    }
     public Object onRetainNonConfigurationInstance(){
         return spots;
     }
+
+
+    //Обрабатываем нажатия по пунктам popup меню, ссылаясь на id каждого пункта, заданные в файле popup.xml:
+
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -334,16 +374,16 @@ public class MapFragment
              switch(location.getRole()){
                  case BASE: {
                      map.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 5.5f));
-                     BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.timon);
-                     final MarkerOptions markerOptions = new MarkerOptions();
+                     BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.base);
+                     MarkerOptions markerOptions = new MarkerOptions();
                      markerOptions.position(point);
                      markerOptions.title(point.latitude + " : " + point.longitude);
                      Marker m = map.addMarker(markerOptions.icon(icon));
                      break;
                  }
                  case WAREHOUSE:{
-                     BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.timon);
-                     final MarkerOptions markerOptions = new MarkerOptions();
+                     BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.warehouse);
+                     MarkerOptions markerOptions = new MarkerOptions();
                      markerOptions.position(point);
                      markerOptions.title(point.latitude + " : " + point.longitude);
                      Marker m = map.addMarker(markerOptions.icon(icon));

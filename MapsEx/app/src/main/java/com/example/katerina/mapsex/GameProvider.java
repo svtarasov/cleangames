@@ -18,16 +18,8 @@ public class GameProvider {
 
     public static GameProvider Initialize(Game game, Boolean change){
          if(!change)
-
                return instance;
-
-
-            else instance = new GameProvider(game);
-
-
-
-
-        return instance;
+            else { instance = new GameProvider(game);return instance;}
     }
 
     public Game getGame(){

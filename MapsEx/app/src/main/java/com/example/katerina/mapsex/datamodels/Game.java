@@ -88,7 +88,8 @@ public class Game {
         this(ID,name);
         this.start_point=start_point;
     }
-    Game(String ID,String name, ArrayList<Location> locations){
+
+   public Game(String ID,String name, ArrayList<Location> locations){
         this(ID,name);
         this.base_loc=locations;
 
