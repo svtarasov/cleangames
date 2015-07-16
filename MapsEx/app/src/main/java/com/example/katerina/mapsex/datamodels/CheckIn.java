@@ -12,7 +12,7 @@ public class CheckIn {
     public ArrayList<Param> garb_param;
     public int photo;
     public String comment;
-    private LatLng position;
+
 
     public LatLng getLocation() {
         return location;
@@ -70,12 +70,15 @@ public class CheckIn {
         this.comment = comment;
         this.location = location;
     }
+    public CheckIn(String comment, ArrayList<Param> garbage, LatLng location) {
+        this.garb_param=garbage;
+        this.comment = comment;
+        this.location = location;
+    }
 
     public String getName() {
         return comment;
     }
 
-    public LatLng getPosition() {
-        return position;
-    }
+
 }

@@ -150,12 +150,9 @@ public class MapFragment
                     return true;
                   }
               });
-<<<<<<< HEAD
-                    popup_menu.inflate(R.menu.popup_menu_map);
 
-=======
                     popup_menu.inflate(R.menu.popup_menu);
->>>>>>> 2cb5af2d72a1d81c94a31fc741894f1af5392c06
+
                     popup_menu.show();
                 }
             });
@@ -233,7 +230,16 @@ public class MapFragment
         if (!spots.containsKey(marker)) { infoWindowContainer.setVisibility(INVISIBLE); return false;}
 
             CheckIn spot = spots.get(marker);
-            textView.setText(spot.getName());
+            ArrayList<Param> garbage =spot.getGarb_param();
+            StringBuffer buffer=new StringBuffer();
+            buffer.append(spot.getComment()+"\n");
+            int AllGarbage=0;
+            for (int i=0;i<garbage.size();i++){
+                buffer.append(garbage.get(i).getName()+" "+garbage.get(i).getAmount()+"\n");
+                AllGarbage+=garbage.get(i).getAmount();
+            }
+            buffer.append("Общее кол-во:"+AllGarbage);
+            textView.setText(buffer);
             myImageView.setImageResource(R.drawable.hellokitty);
 
             delete.setOnClickListener(new View.OnClickListener() {
@@ -256,17 +262,20 @@ public class MapFragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == -1) {
-                String result = data.getStringExtra("comment")+"\n"+data.getStringExtra("garbage");
+                
+                LocationProvider locationProvider=LocationProvider.Initialize();
+                CheckIn checkIn=locationProvider.getCheckin();
+                LatLng locationTemp=checkIn.getLocation();
                 final MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(temp);
-                markerOptions.title(temp.latitude + " : " + temp.longitude);
-                map.animateCamera(CameraUpdateFactory.newLatLng(temp));
+                markerOptions.position(checkIn.getLocation());
+                markerOptions.title(locationTemp.latitude + " : " + locationTemp.longitude);
+                map.animateCamera(CameraUpdateFactory.newLatLng(locationTemp));
                 Projection projection = map.getProjection();
                 BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.pin);
                 Marker m =   map.addMarker(markerOptions.icon(icon));
                 Date cDate = new Date();
                 String fDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(cDate);
-                spots.put(m,new CheckIn(result,temp));
+                spots.put(m,checkIn);
             }
             if (resultCode == 1) {
                 //Write your code if there's no result

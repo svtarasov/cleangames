@@ -23,6 +23,14 @@ public class LocationProvider {
         return instance;
     }
 
+    public void setCheckin(CheckIn checkIn){
+        this.checkIn=checkIn;
+    }
+
+    public CheckIn getCheckin(){
+        return this.checkIn;
+    }
+
 
     public LatLng getLocataion(){
         return this.location;

@@ -8,18 +8,21 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.katerina.mapsex.datamodels.CheckIn;
+import com.example.katerina.mapsex.datamodels.Param;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
 
 
 public class CheckInInfoActivity extends Activity{
     String a, b;
-    EditText Text1;
+    EditText commentText;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_in);
-        Text1 = (EditText) findViewById(R.id.EditText01);
+        commentText = (EditText) findViewById(R.id.EditText01);
 
 
         final Button button1 = (Button) findViewById(R.id.button_submit);
@@ -35,17 +38,23 @@ public class CheckInInfoActivity extends Activity{
 
                     LocationProvider locationProvider=LocationProvider.Initialize();
                     LatLng location=locationProvider.getLocataion();
-                    Arr
-                    CheckIn checkIn=new
+                    ArrayList<Param> garbage=new ArrayList<Param>();
+                    garbage.add(new Param("Пластик",Integer.parseInt(garbage1.getText().toString())));
+                    garbage.add(new Param("Металл",Integer.parseInt(garbage2.getText().toString())));
+                    garbage.add(new Param("Стекло",Integer.parseInt(garbage3.getText().toString())));
+                    garbage.add(new Param("Смешанный мусор",Integer.parseInt(garbage1.getText().toString())));
+                    garbage.add(new Param("Батарейки",Integer.parseInt(garbage1.getText().toString())));
+                    CheckIn checkIn=new CheckIn(commentText.getText().toString(),garbage,location);
+                    locationProvider.setCheckin(checkIn);
 
 
-                    a = Text1.getText().toString()+" ";
+                  /*  a = commentText.getText().toString()+" ";
                     b= getResources().getString(R.string.garbage1)+": "+garbage1.getText().toString()+"\n"+getResources().getString(R.string.garbage2)+": "+garbage2.getText()+"\n"+getResources().getString(R.string.garbage3)+": "+garbage3.getText()+"\n"+getResources().getString(R.string.garbage4)+": "+garbage4.getText()+"\n"+getResources().getString(R.string.garbage5)+": "+garbage5.getText();
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("comment",a);
                     returnIntent.putExtra("garbage",b);
                     setResult(RESULT_OK,returnIntent);
-                    finish();
+                    finish();*/
 
 
 
