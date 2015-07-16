@@ -30,7 +30,7 @@ public class CheckInInfoActivity extends Activity{
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-
+                    LocationProvider locationProvider=LocationProvider.Initialize();
                     a = Text1.getText().toString()+" ";
                     b= getResources().getString(R.string.garbage1)+": "+garbage1.getText().toString()+"\n"+getResources().getString(R.string.garbage2)+": "+garbage2.getText()+"\n"+getResources().getString(R.string.garbage3)+": "+garbage3.getText()+"\n"+getResources().getString(R.string.garbage4)+": "+garbage4.getText()+"\n"+getResources().getString(R.string.garbage5)+": "+garbage5.getText();
                     Intent returnIntent = new Intent();

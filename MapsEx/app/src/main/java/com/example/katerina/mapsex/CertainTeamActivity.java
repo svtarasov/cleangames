@@ -29,7 +29,7 @@ public class CertainTeamActivity extends ActionBarActivity {
             str= extras.getString("Name");
         }
         setTitle(str);
-        findViewById(R.id.Map).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.Join).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CertainTeamActivity.this, DemoActivity.class));

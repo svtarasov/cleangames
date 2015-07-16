@@ -127,28 +127,27 @@ public class MapFragment
                 //слушатель нажатий по пунктам OnMenuItemClickListener:
                 PopupMenu popup_menu = new PopupMenu(getActivity(), view);
                 popup_menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.game_menu:
-                                //Toast.makeText(this, "Выбран пункт 1", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getActivity(), GamesActivity.class));
-                                return true;
-                            case R.id.teams_menu:
-                                //Toast.makeText(this, "Выбран пункт 2", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getActivity(), TeamsActivity.class));
-                                return true;
-                            case R.id.map_menu:
-                                //Toast.makeText(this, "Выбран пункт 3", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getActivity(), DemoActivity.class));
-                                return true;
-                            case R.id.rating_menu:
-                                startActivity(new Intent(getActivity(), RatingActivity.class));
-                                return true;
-                        }
-                        return true;
-                    }
-                });
-                    popup_menu.inflate(R.menu.popup_menu);
+
+
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.game_menu:
+                              //Toast.makeText(this, "Выбран пункт 1", Toast.LENGTH_SHORT).show();
+                              startActivity(new Intent(getActivity(), GamesActivity.class));
+                              return true;
+                        case R.id.teams_menu:
+                              //Toast.makeText(this, "Выбран пункт 2", Toast.LENGTH_SHORT).show();
+                              startActivity(new Intent(getActivity(), TeamsActivity.class));
+                              return true;
+                        case R.id.rating_menu:
+                              startActivity(new Intent(getActivity(), RatingActivity.class));
+                              return true;
+                      }
+                    return true;
+                  }
+              });
+                    popup_menu.inflate(R.menu.popup_menu_map);
+
                     popup_menu.show();
                 }
             });
@@ -282,6 +281,7 @@ public class MapFragment
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Handle a positive answer
+                        LocationProvider locationProvider=LocationProvider.Initialize(temp,true);
                         startActivityForResult(new Intent(getActivity(), CheckInInfoActivity.class), 1);
                     }
                 })
