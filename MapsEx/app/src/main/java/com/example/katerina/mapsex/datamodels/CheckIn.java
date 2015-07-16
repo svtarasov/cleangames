@@ -12,7 +12,6 @@ public class CheckIn {
     public ArrayList<Param> garb_param;
     public int photo;
     public String comment;
-
     private LatLng position;
 
     public LatLng getLocation() {
@@ -67,9 +66,9 @@ public class CheckIn {
         return ID;
     }
 
-    public CheckIn(String comment, LatLng position) {
+    public CheckIn(String comment, LatLng location) {
         this.comment = comment;
-        this.position = position;
+        this.location = location;
     }
 
     public String getName() {
