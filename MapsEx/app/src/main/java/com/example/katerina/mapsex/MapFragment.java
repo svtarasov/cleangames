@@ -159,10 +159,6 @@ public class MapFragment
                               //Toast.makeText(this, "Выбран пункт 2", Toast.LENGTH_SHORT).show();
                               startActivity(new Intent(getActivity(), TeamsActivity.class));
                               return true;
-                        case R.id.map_menu:
-                              //Toast.makeText(this, "Выбран пункт 3", Toast.LENGTH_SHORT).show();
-                              startActivity(new Intent(getActivity(), DemoActivity.class));
-                              return true;
                         case R.id.rating_menu:
                               startActivity(new Intent(getActivity(), RatingActivity.class));
                               return true;
@@ -170,7 +166,7 @@ public class MapFragment
                     return true;
                   }
               });
-                    popup_menu.inflate(R.menu.popup_menu);
+                    popup_menu.inflate(R.menu.popup_menu_map);
                     popup_menu.show();
                 }
             });
