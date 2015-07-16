@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="title_activity_activity_2">Activity_2</string>
+    <string name="title_activity_activity_2">GarbageParamethers</string>
     <string name="plus">+</string>
     <string name="garbage1">Пластик</string>
     <string name="garbage2">Металл</string>
