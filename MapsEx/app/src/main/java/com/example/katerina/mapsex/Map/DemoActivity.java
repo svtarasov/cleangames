@@ -1,9 +1,9 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.Map;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.os.Bundle;
 
+import com.example.katerina.mapsex.Map.MapFragment;
 import com.example.katerina.mapsex.R;
 
 public class DemoActivity extends Activity {

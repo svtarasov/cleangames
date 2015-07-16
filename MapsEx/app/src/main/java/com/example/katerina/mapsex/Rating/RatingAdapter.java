@@ -1,4 +1,4 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.Rating;
 
 /**
  * Created by Katerina on 13.07.2015.
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.katerina.mapsex.R;
 import com.example.katerina.mapsex.datamodels.Team;
 
 import java.util.ArrayList;
