@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.katerina.mapsex.datamodels.CheckIn;
+import com.google.android.gms.maps.model.LatLng;
+
 
 public class CheckInInfoActivity extends Activity{
     String a, b;
@@ -31,6 +34,11 @@ public class CheckInInfoActivity extends Activity{
             public void onClick(View v) {
 
                     LocationProvider locationProvider=LocationProvider.Initialize();
+                    LatLng location=locationProvider.getLocataion();
+                    Arr
+                    CheckIn checkIn=new
+
+
                     a = Text1.getText().toString()+" ";
                     b= getResources().getString(R.string.garbage1)+": "+garbage1.getText().toString()+"\n"+getResources().getString(R.string.garbage2)+": "+garbage2.getText()+"\n"+getResources().getString(R.string.garbage3)+": "+garbage3.getText()+"\n"+getResources().getString(R.string.garbage4)+": "+garbage4.getText()+"\n"+getResources().getString(R.string.garbage5)+": "+garbage5.getText();
                     Intent returnIntent = new Intent();

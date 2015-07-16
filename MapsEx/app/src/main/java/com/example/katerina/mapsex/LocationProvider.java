@@ -12,13 +12,17 @@ public class LocationProvider {
     private static CheckIn checkIn;
     private static LocationProvider instance;
     private LocationProvider(LatLng location){
-        this.locataion=location;
+        this.location=location;
 
     }
     public static  LocationProvider Initialize(LatLng location, boolean change){
         if (!change){  return instance;}
             else { instance = new LocationProvider(location);return instance;}
     }
+    public static  LocationProvider Initialize(){
+        return instance;
+    }
+
 
     public LatLng getLocataion(){
         return this.location;

@@ -135,6 +135,10 @@ public class MapFragment
                               //Toast.makeText(this, "Выбран пункт 1", Toast.LENGTH_SHORT).show();
                               startActivity(new Intent(getActivity(), GamesActivity.class));
                               return true;
+                        case R.id.map_menu:
+                            //Toast.makeText(this, "Выбран пункт 3", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getActivity(), DemoActivity.class));
+                            return true;
                         case R.id.teams_menu:
                               //Toast.makeText(this, "Выбран пункт 2", Toast.LENGTH_SHORT).show();
                               startActivity(new Intent(getActivity(), TeamsActivity.class));
@@ -146,8 +150,12 @@ public class MapFragment
                     return true;
                   }
               });
+<<<<<<< HEAD
                     popup_menu.inflate(R.menu.popup_menu_map);
 
+=======
+                    popup_menu.inflate(R.menu.popup_menu);
+>>>>>>> 2cb5af2d72a1d81c94a31fc741894f1af5392c06
                     popup_menu.show();
                 }
             });
@@ -334,7 +342,7 @@ public class MapFragment
     }
 
     private void markerInitializer(){
-        GameProvider provider= GameProvider.Initialize(new Game(), false);
+        GameProvider provider= GameProvider.Initialize(new Game());
         Game game = provider.getGame();
         ArrayList<CheckIn> checkIns = Repository.getCheckins();
         ArrayList<Location> locations=game.base_loc;

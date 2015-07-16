@@ -68,11 +68,14 @@ public class RatingActivity extends ActionBarActivity {
                                         //Toast.makeText(this, "Выбран пункт 3", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(RatingActivity.this, DemoActivity.class));
                                         return true;
+                                    case R.id.rating_menu:
+                                        startActivity(new Intent(RatingActivity.this, RatingActivity.class));
+                                        return true;
                                 }
                                 return true;
                             }
                         });
-                        popup_menu.inflate(R.menu.popup_menu_rating);
+                        popup_menu.inflate(R.menu.popup_menu);
                         popup_menu.show();
                     }
                 });
