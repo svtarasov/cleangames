@@ -21,14 +21,11 @@ public class CertainTeamActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_certain_team);
-        Bundle extras = getIntent().getExtras();
-        String str ;
-        if(extras == null) {
-            str= null;
-        } else {
-            str= extras.getString("Name");
-        }
-        setTitle(str);
+
+        TeamProvider provider= TeamProvider.Initialize(new Team());
+        Team team = provider.getTeam();
+
+        setTitle(team.name);
         findViewById(R.id.Join).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

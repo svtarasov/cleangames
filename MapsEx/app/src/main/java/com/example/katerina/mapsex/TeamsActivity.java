@@ -42,8 +42,7 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(TeamsActivity.this, CertainTeamActivity.class);
                 Team team = (Team) parent.getItemAtPosition(position);
-
-                intent.putExtra("Name", team.name);
+                TeamProvider provider= TeamProvider.Initialize(team, true);
                 startActivity(intent);
             }
         });
@@ -65,7 +64,7 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
                         //слушатель нажатий по пунктам OnMenuItemClickListener:
                         PopupMenu popup_menu = new PopupMenu(TeamsActivity.this, view);
                         popup_menu.setOnMenuItemClickListener(TeamsActivity.this);
-                        popup_menu.inflate(R.menu.popup_menu_team);
+                        popup_menu.inflate(R.menu.popup_menu);
                         popup_menu.show();
                     }
                 });
@@ -81,6 +80,10 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
             case R.id.map_menu:
                 //Toast.makeText(this, "Выбран пункт 3", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(TeamsActivity.this, DemoActivity.class));
+                return true;
+            case R.id.teams_menu:
+                //Toast.makeText(this, "Выбран пункт 2", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(TeamsActivity.this, TeamsActivity.class));
                 return true;
             case R.id.rating_menu:
                 startActivity(new Intent(TeamsActivity.this, RatingActivity.class));

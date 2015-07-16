@@ -22,6 +22,9 @@ public class GameProvider {
             else { instance = new GameProvider(game);return instance;}
     }
 
+    public static GameProvider Initialize(Game game){
+            return instance;
+    }
     public Game getGame(){
         return this.game;
     }
