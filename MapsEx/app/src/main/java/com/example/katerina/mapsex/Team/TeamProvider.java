@@ -1,4 +1,4 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.Team;
 
 import com.example.katerina.mapsex.datamodels.Team;
 

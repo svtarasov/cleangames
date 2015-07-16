@@ -1,4 +1,4 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.Rating;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,24 +6,38 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.example.katerina.mapsex.datamodels.CheckIn;
-import com.example.katerina.mapsex.datamodels.Param;
-import com.google.android.gms.maps.model.LatLng;
+import com.example.katerina.mapsex.R;
 
-import java.util.ArrayList;
-
-
-public class CheckInInfoActivity extends Activity{
+/**
+ * Created by 1 on 15.07.2015.
+ */
+public class AdminGarbageTransferActivity extends Activity{
     String a, b;
-    EditText commentText;
+    EditText Text1;
+    TextView command_name;
+    TextView  command_score;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_in);
-        commentText = (EditText) findViewById(R.id.EditText01);
+        setContentView(R.layout.activity_admin_transfer);
+         command_name=(TextView) findViewById(R.id.command_name);
+        command_score=(TextView) findViewById(R.id.command_score);
+        Bundle extras = getIntent().getExtras();
+        String name; int score;
+        if (extras == null) {
+            name = null;
+            score= 0;
+        } else {
+            name = extras.getString("name");
+            score =  extras.getInt("score");
 
+        }
+
+        command_score.append(""+score);
+        command_name.append(name);
 
         final Button button1 = (Button) findViewById(R.id.button_submit);
         final EditText garbage1=(EditText)findViewById(R.id.garbage1);
@@ -36,25 +50,14 @@ public class CheckInInfoActivity extends Activity{
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                    LocationProvider locationProvider=LocationProvider.Initialize();
-                    LatLng location=locationProvider.getLocataion();
-                    ArrayList<Param> garbage=new ArrayList<Param>();
-                    garbage.add(new Param("Пластик",Integer.parseInt(garbage1.getText().toString())));
-                    garbage.add(new Param("Металл",Integer.parseInt(garbage2.getText().toString())));
-                    garbage.add(new Param("Стекло",Integer.parseInt(garbage3.getText().toString())));
-                    garbage.add(new Param("Смешанный мусор",Integer.parseInt(garbage1.getText().toString())));
-                    garbage.add(new Param("Батарейки",Integer.parseInt(garbage1.getText().toString())));
-                    CheckIn checkIn=new CheckIn(commentText.getText().toString(),garbage,location);
-                    locationProvider.setCheckin(checkIn);
 
-
-                  /*  a = commentText.getText().toString()+" ";
-                    b= getResources().getString(R.string.garbage1)+": "+garbage1.getText().toString()+"\n"+getResources().getString(R.string.garbage2)+": "+garbage2.getText()+"\n"+getResources().getString(R.string.garbage3)+": "+garbage3.getText()+"\n"+getResources().getString(R.string.garbage4)+": "+garbage4.getText()+"\n"+getResources().getString(R.string.garbage5)+": "+garbage5.getText();
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("comment",a);
-                    returnIntent.putExtra("garbage",b);
-                    setResult(RESULT_OK,returnIntent);
-                    finish();*/
+                a = Text1.getText().toString()+" ";
+                b= getResources().getString(R.string.garbage1)+": "+garbage1.getText().toString()+"\n"+getResources().getString(R.string.garbage2)+": "+garbage2.getText()+"\n"+getResources().getString(R.string.garbage3)+": "+garbage3.getText()+"\n"+getResources().getString(R.string.garbage4)+": "+garbage4.getText()+"\n"+getResources().getString(R.string.garbage5)+": "+garbage5.getText();
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("comment",a);
+                returnIntent.putExtra("garbage",b);
+                setResult(RESULT_OK,returnIntent);
+                finish();
 
 
 
@@ -68,16 +71,16 @@ public class CheckInInfoActivity extends Activity{
         });
 
         final Button button = (Button) findViewById(R.id.button);
-         button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               Integer temp= Integer.parseInt(garbage1.getText().toString());
-               if (temp>0){
-               temp--;
-                garbage1.getText().clear();
-                garbage1.getText().append(temp.toString());}
+                Integer temp= Integer.parseInt(garbage1.getText().toString());
+                if (temp>0){
+                    temp--;
+                    garbage1.getText().clear();
+                    garbage1.getText().append(temp.toString());}
             }
 
-            });
+        });
 
         final Button button2 = (Button) findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
@@ -183,8 +186,4 @@ public class CheckInInfoActivity extends Activity{
         });
     }
 
-
-
-
 }
-

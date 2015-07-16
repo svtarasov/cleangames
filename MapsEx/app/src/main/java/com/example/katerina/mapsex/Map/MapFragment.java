@@ -1,4 +1,4 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.Map;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -19,11 +19,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import com.example.katerina.mapsex.datamodels.*;
+
+import com.example.katerina.mapsex.Game.GameProvider;
+import com.example.katerina.mapsex.Game.GamesActivity;
+import com.example.katerina.mapsex.LocationProvider;
+import com.example.katerina.mapsex.R;
+import com.example.katerina.mapsex.Rating.RatingActivity;
+import com.example.katerina.mapsex.Repository;
+import com.example.katerina.mapsex.Team.TeamsActivity;
 
 import com.example.katerina.mapsex.datamodels.CheckIn;
 import com.example.katerina.mapsex.datamodels.Game;
 import com.example.katerina.mapsex.datamodels.Location;
+import com.example.katerina.mapsex.datamodels.Param;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;
@@ -263,7 +271,7 @@ public class MapFragment
         if (requestCode == 1) {
             if (resultCode == -1) {
                 
-                LocationProvider locationProvider=LocationProvider.Initialize();
+                LocationProvider locationProvider= LocationProvider.Initialize();
                 CheckIn checkIn=locationProvider.getCheckin();
                 LatLng locationTemp=checkIn.getLocation();
                 final MarkerOptions markerOptions = new MarkerOptions();
