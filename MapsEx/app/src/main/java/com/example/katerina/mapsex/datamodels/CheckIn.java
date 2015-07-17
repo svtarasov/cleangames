@@ -1,5 +1,8 @@
 package com.example.katerina.mapsex.datamodels;
 
+import android.graphics.Bitmap;
+import android.widget.ImageView;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -10,7 +13,7 @@ public class CheckIn {
     public Team team;
     public LatLng location;
     public ArrayList<Param> garb_param;
-    public int photo;
+    public Bitmap photo;
     public String comment;
 
 
@@ -30,11 +33,11 @@ public class CheckIn {
         this.comment = comment;
     }
 
-    public int getPhoto() {
+    public Bitmap getPhoto() {
         return photo;
     }
 
-    public void setPhoto(int photo) {
+    public void setPhoto(Bitmap photo) {
         this.photo = photo;
     }
 
@@ -70,10 +73,17 @@ public class CheckIn {
         this.comment = comment;
         this.location = location;
     }
+    public CheckIn(String comment, ArrayList<Param> garbage, LatLng location,Bitmap photo) {
+        this.garb_param=garbage;
+        this.comment = comment;
+        this.location = location;
+        this.photo=photo;
+    }
     public CheckIn(String comment, ArrayList<Param> garbage, LatLng location) {
         this.garb_param=garbage;
         this.comment = comment;
         this.location = location;
+
     }
 
     public String getName() {

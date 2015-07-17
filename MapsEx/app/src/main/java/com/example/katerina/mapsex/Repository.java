@@ -1,5 +1,7 @@
 package com.example.katerina.mapsex;
 
+import android.widget.ImageView;
+
 import com.example.katerina.mapsex.datamodels.Game;
 import com.example.katerina.mapsex.datamodels.Location;
 import com.example.katerina.mapsex.datamodels.LocationRole;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 public class Repository {
 
     public static ArrayList<CheckIn> getCheckins(){
+
         ArrayList<CheckIn> checkIns = new ArrayList<>();
         checkIns.add(new CheckIn("Я мусор",new ArrayList<Param>() ,new LatLng(20.35, 20.16)));
         checkIns.add(new CheckIn("Я мусор2",new ArrayList<Param>(), new LatLng(20.45, 20.15)));
