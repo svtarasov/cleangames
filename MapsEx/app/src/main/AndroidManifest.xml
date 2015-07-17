@@ -59,7 +59,7 @@
             android:label="@string/title_activity_activity_2" >
         </activity>
         <activity
-            android:name=".Registration.ParolActivity"
+            android:name=".Registration.PasswordActivity"
             android:label="@string/title_activity_parol"
             android:parentActivityName=".Registration.LoginActivity" >
             <meta-data
@@ -67,7 +67,8 @@
                 android:value=".Registration.LoginActivity" />
         </activity>
         <activity
-            android:name=".Registration.Registration"
+
+            android:name=".Registration.RegisterActivity"
             android:label="@string/title_activity_registration"
             android:parentActivityName=".Registration.LoginActivity" >
             <meta-data
