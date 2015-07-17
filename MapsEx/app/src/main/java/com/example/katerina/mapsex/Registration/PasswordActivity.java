@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.example.katerina.mapsex.R;
 
 
-public class ParolActivity extends ActionBarActivity {
+public class PasswordActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
