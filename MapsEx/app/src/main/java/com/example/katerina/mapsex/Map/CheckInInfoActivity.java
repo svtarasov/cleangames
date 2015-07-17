@@ -3,12 +3,15 @@ package com.example.katerina.mapsex.Map;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 
 import com.example.katerina.mapsex.datamodels.CheckIn;
@@ -16,7 +19,11 @@ import com.example.katerina.mapsex.datamodels.Param;
 import com.google.android.gms.maps.model.LatLng;
 import com.example.katerina.mapsex.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.example.katerina.mapsex.R;
 
@@ -24,7 +31,10 @@ import com.example.katerina.mapsex.R;
 
 public class CheckInInfoActivity extends Activity{
     String a, b;
+    Bitmap imageBitmap;
     EditText commentText;
+    String mCurrentPhotoPath;
+    private static final int CAMERA_REQUEST = 1888;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -52,7 +62,7 @@ public class CheckInInfoActivity extends Activity{
                     garbage.add(new Param("Стекло",Integer.parseInt(garbage3.getText().toString())));
                     garbage.add(new Param("Смешанный мусор",Integer.parseInt(garbage1.getText().toString())));
                     garbage.add(new Param("Батарейки",Integer.parseInt(garbage1.getText().toString())));
-                    CheckIn checkIn=new CheckIn(commentText.getText().toString(),garbage,location);
+                    CheckIn checkIn=new CheckIn(commentText.getText().toString(),garbage,location,imageBitmap);
                     locationProvider.setCheckin(checkIn);
 
 
@@ -202,19 +212,40 @@ public class CheckInInfoActivity extends Activity{
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        }
+        startActivityForResult(takePictureIntent, CAMERA_REQUEST);
+
+
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageBitmap = (Bitmap) extras.get("data");
+
+
 
         }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
     }
 
 }
