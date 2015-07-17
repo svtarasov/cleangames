@@ -223,21 +223,24 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:weightSum="1">
 
         <Button
             android:id="@+id/button_submit"
-            android:layout_width="259dp"
+            android:layout_width="235dp"
             android:layout_height="wrap_content"
             android:text="Оставить комментарий"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:layout_weight="0.80" />
 
         <ImageButton
             android:layout_width="129dp"
             android:layout_height="match_parent"
             android:id="@+id/TakeAPhoto"
-            android:src="@drawable/photo"
-            android:layout_gravity="right" />
+            android:scaleType="fitCenter"
+            android:layout_gravity="right"
+            android:src="@drawable/photo" />
     </LinearLayout>
 
 </LinearLayout>
