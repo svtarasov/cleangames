@@ -7,8 +7,8 @@
     tools:context="com.example.katerina.mapsex.Rating.RatingActivity">
 
     <ImageButton
-        android:layout_width="42dp"
-        android:layout_height="30dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/button_popup"
         android:layout_gravity="left|center_horizontal"
         android:background="@drawable/menu_button"
