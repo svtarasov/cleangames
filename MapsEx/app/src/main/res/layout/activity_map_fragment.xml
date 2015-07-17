@@ -15,7 +15,7 @@
     <AbsoluteLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            >
+        android:clickable="false">
 
         <LinearLayout
                 android:id="@+id/container_popup"
@@ -50,6 +50,7 @@
                         android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:textStyle="normal" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -79,12 +80,21 @@
 
     </AbsoluteLayout>
     <ImageButton
-        android:layout_width="42dp"
-        android:layout_height="30dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/button_popup"
         android:layout_gravity="left|center_horizontal"
         android:background="@drawable/menu_button"
         android:layout_weight="0.07" />
+
+    <ImageButton
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/button_reload"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="150dp"
+        android:background="@drawable/reload_button"
+        android:onClick="reload_Click" />
 
 </RelativeLayout>
 

@@ -233,11 +233,12 @@
             android:textSize="30sp" />
 
         <ImageButton
-            android:layout_width="129dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/TakeAPhoto"
             android:src="@drawable/photo"
-            android:layout_gravity="right" />
+            android:layout_gravity="right"
+            android:layout_marginRight="1dp" />
     </LinearLayout>
 
 </LinearLayout>
