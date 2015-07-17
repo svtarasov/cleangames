@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 
 import com.example.katerina.mapsex.datamodels.CheckIn;
@@ -182,7 +183,7 @@ public class CheckInInfoActivity extends Activity{
         final Button button10 = (Button) findViewById(R.id.button10);
         button10.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Integer temp= Integer.parseInt(garbage5.getText().toString());
+                Integer temp = Integer.parseInt(garbage5.getText().toString());
                 temp++;
                 garbage5.getText().clear();
                 garbage5.getText().append(temp.toString());
@@ -190,7 +191,7 @@ public class CheckInInfoActivity extends Activity{
 
         });
 
-        final Button photo = (Button) findViewById(R.id.TakeAPhoto);
+        final ImageButton photo = (ImageButton) findViewById(R.id.TakeAPhoto);
         photo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                dispatchTakePictureIntent();
@@ -208,11 +209,11 @@ public class CheckInInfoActivity extends Activity{
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        
+
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            mImageView.setImageBitmap(imageBitmap);
+
         }
     }
 
