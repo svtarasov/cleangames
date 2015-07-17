@@ -16,7 +16,7 @@ public class ParolActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_parol);
+        setContentView(R.layout.activity_password);
     }
 
     @Override

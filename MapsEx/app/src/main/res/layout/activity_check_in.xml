@@ -220,12 +220,25 @@
             android:layout_weight="0.05" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_submit"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Оставить комментарий"
-        android:textSize="30sp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button_submit"
+            android:layout_width="259dp"
+            android:layout_height="wrap_content"
+            android:text="Оставить комментарий"
+            android:textSize="30sp" />
+
+        <ImageButton
+            android:layout_width="129dp"
+            android:layout_height="match_parent"
+            android:id="@+id/TakeAPhoto"
+            android:src="@drawable/photo"
+            android:layout_gravity="right" />
+    </LinearLayout>
 
 </LinearLayout>
 </ScrollView>

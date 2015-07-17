@@ -2,7 +2,9 @@ package com.example.katerina.mapsex.Map;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +24,7 @@ import com.example.katerina.mapsex.R;
 public class CheckInInfoActivity extends Activity{
     String a, b;
     EditText commentText;
-
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -187,10 +189,32 @@ public class CheckInInfoActivity extends Activity{
             }
 
         });
+
+        final Button photo = (Button) findViewById(R.id.TakeAPhoto);
+        photo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+               dispatchTakePictureIntent();
+            }
+
+        });
     }
 
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            mImageView.setImageBitmap(imageBitmap);
+        }
+    }
 
 }
 
