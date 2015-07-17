@@ -14,7 +14,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.example.katerina.mapsex.GamesActivity"/>
+        className = "com.example.katerina.mapsex.Game.GamesActivity"/>
       <point      
         x = "500"      
         y = "5620"/>
@@ -22,7 +22,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.MenuState"      
-        className = "com.example.katerina.mapsex.GamesActivity"/>
+        className = "com.example.katerina.mapsex.Game.GamesActivity"/>
       <point      
         x = "1768"      
         y = "5620"/>
@@ -30,7 +30,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.example.katerina.mapsex.LoginActivity"/>
+        className = "com.example.katerina.mapsex.Registration.LoginActivity"/>
       <point      
         x = "550"      
         y = "9810"/>
@@ -38,7 +38,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.example.katerina.mapsex.Registration"/>
+        className = "com.example.katerina.mapsex.Registration.Registration"/>
       <point      
         x = "500"      
         y = "7000"/>
@@ -46,7 +46,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.MenuState"      
-        className = "com.example.katerina.mapsex.Registration"/>
+        className = "com.example.katerina.mapsex.Registration.Registration"/>
       <point      
         x = "1768"      
         y = "7000"/>
@@ -54,7 +54,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.example.katerina.mapsex.ParolActivity"/>
+        className = "com.example.katerina.mapsex.Registration.ParolActivity"/>
       <point      
         x = "500"      
         y = "8380"/>
@@ -62,7 +62,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.MenuState"      
-        className = "com.example.katerina.mapsex.ParolActivity"/>
+        className = "com.example.katerina.mapsex.Registration.ParolActivity"/>
       <point      
         x = "1768"      
         y = "8380"/>
@@ -70,7 +70,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.example.katerina.mapsex.NewTeamActivity"/>
+        className = "com.example.katerina.mapsex.Team.NewTeamActivity"/>
       <point      
         x = "2718"      
         y = "788"/>
@@ -78,7 +78,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.example.katerina.mapsex.CertainTeamActivity"/>
+        className = "com.example.katerina.mapsex.Team.CertainTeamActivity"/>
       <point      
         x = "1768"      
         y = "2860"/>
@@ -86,7 +86,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.MenuState"      
-        className = "com.example.katerina.mapsex.CertainTeamActivity"/>
+        className = "com.example.katerina.mapsex.Team.CertainTeamActivity"/>
       <point      
         x = "3036"      
         y = "2860"/>
@@ -94,7 +94,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.example.katerina.mapsex.TeamsActivity"/>
+        className = "com.example.katerina.mapsex.Team.TeamsActivity"/>
       <point      
         x = "500"      
         y = "100"/>
@@ -102,7 +102,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.MenuState"      
-        className = "com.example.katerina.mapsex.TeamsActivity"/>
+        className = "com.example.katerina.mapsex.Team.TeamsActivity"/>
       <point      
         x = "1768"      
         y = "100"/>
@@ -110,7 +110,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.example.katerina.mapsex.DemoActivity"/>
+        className = "com.example.katerina.mapsex.Map.DemoActivity"/>
       <point      
         x = "3036"      
         y = "4240"/>
@@ -118,7 +118,7 @@
     <statePointEntry>
       <state      
         class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
-        className = "com.example.katerina.mapsex.CheckInInfoActivity"/>
+        className = "com.example.katerina.mapsex.Map.CheckInInfoActivity"/>
       <point      
         x = "600"      
         y = "9860"/>

@@ -1,4 +1,4 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.Team;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +9,11 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 
+import com.example.katerina.mapsex.Map.DemoActivity;
+import com.example.katerina.mapsex.Game.GamesActivity;
+import com.example.katerina.mapsex.R;
+import com.example.katerina.mapsex.Rating.RatingActivity;
+import com.example.katerina.mapsex.Repository;
 import com.example.katerina.mapsex.datamodels.Team;
 import com.example.katerina.mapsex.datamodels.User;
 
@@ -21,14 +26,11 @@ public class CertainTeamActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_certain_team);
-        Bundle extras = getIntent().getExtras();
-        String str ;
-        if(extras == null) {
-            str= null;
-        } else {
-            str= extras.getString("Name");
-        }
-        setTitle(str);
+
+        TeamProvider provider= TeamProvider.Initialize(new Team());
+        Team team = provider.getTeam();
+
+        setTitle(team.name);
         findViewById(R.id.Join).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

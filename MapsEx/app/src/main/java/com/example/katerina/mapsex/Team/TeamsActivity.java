@@ -1,4 +1,4 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.Team;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 
+import com.example.katerina.mapsex.Map.DemoActivity;
+import com.example.katerina.mapsex.Game.GameProvider;
+import com.example.katerina.mapsex.Game.GamesActivity;
+import com.example.katerina.mapsex.R;
+import com.example.katerina.mapsex.Rating.RatingActivity;
+import com.example.katerina.mapsex.Repository;
 import com.example.katerina.mapsex.datamodels.Game;
 import com.example.katerina.mapsex.datamodels.Team;
 
@@ -24,14 +30,10 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teams);
-        Bundle extras = getIntent().getExtras();
-        String str;
-        if (extras == null) {
-            str = null;
-        } else {
-            str = extras.getString("Name");
-        }
-        setTitle("Teams in game : " + str);
+
+        GameProvider provider= GameProvider.Initialize(new Game());
+        Game game = provider.getGame();
+        setTitle("Teams in game : " + game.name);
 
         final ListView listViewTeams = (ListView) findViewById(R.id.listTeams);
         ArrayList<Team> exampleList = Repository.getTeams(new Game());
@@ -42,8 +44,7 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(TeamsActivity.this, CertainTeamActivity.class);
                 Team team = (Team) parent.getItemAtPosition(position);
-
-                intent.putExtra("Name", team.name);
+                TeamProvider provider= TeamProvider.Initialize(team, true);
                 startActivity(intent);
             }
         });
@@ -65,7 +66,7 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
                         //слушатель нажатий по пунктам OnMenuItemClickListener:
                         PopupMenu popup_menu = new PopupMenu(TeamsActivity.this, view);
                         popup_menu.setOnMenuItemClickListener(TeamsActivity.this);
-                        popup_menu.inflate(R.menu.popup_menu_team);
+                        popup_menu.inflate(R.menu.popup_menu);
                         popup_menu.show();
                     }
                 });
@@ -81,6 +82,10 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
             case R.id.map_menu:
                 //Toast.makeText(this, "Выбран пункт 3", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(TeamsActivity.this, DemoActivity.class));
+                return true;
+            case R.id.teams_menu:
+                //Toast.makeText(this, "Выбран пункт 2", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(TeamsActivity.this, TeamsActivity.class));
                 return true;
             case R.id.rating_menu:
                 startActivity(new Intent(TeamsActivity.this, RatingActivity.class));

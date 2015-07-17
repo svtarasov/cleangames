@@ -47,5 +47,11 @@ public class Param {
         this.price = price;
     }
 
+    public Param(String name,int amount){
+        this.amount=amount;
+        this.name=name;
+    }
+
+
 
 }

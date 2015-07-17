@@ -1,4 +1,4 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.Map;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -19,11 +19,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import com.example.katerina.mapsex.datamodels.*;
+
+import com.example.katerina.mapsex.Game.GameProvider;
+import com.example.katerina.mapsex.Game.GamesActivity;
+import com.example.katerina.mapsex.LocationProvider;
+import com.example.katerina.mapsex.R;
+import com.example.katerina.mapsex.Rating.RatingActivity;
+import com.example.katerina.mapsex.Repository;
+import com.example.katerina.mapsex.Team.TeamsActivity;
 
 import com.example.katerina.mapsex.datamodels.CheckIn;
 import com.example.katerina.mapsex.datamodels.Game;
 import com.example.katerina.mapsex.datamodels.Location;
+import com.example.katerina.mapsex.datamodels.Param;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;
@@ -111,34 +119,12 @@ public class MapFragment
 
         //Установка маркера штаба и перемещение карты на его расположение
         markerInitializer();
-
-
-      /*  GameProvider provider= GameProvider.Initialize(new Game(),false);
-        Game game = provider.getGame();
-        LatLng start=game.start_point;
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(start, 5.5f));
-        final MarkerOptions markerOptions = new MarkerOptions();
-
-        markerOptions.position(start);
-        markerOptions.title(start.latitude + " : " + start.longitude);
-        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.timon);
-
-        Marker m =   map.addMarker(markerOptions.icon(icon));*/
-
         map.getUiSettings().setRotateGesturesEnabled(false);
         map.setMyLocationEnabled(true);
         map.setOnMapClickListener(this);
         map.setOnMarkerClickListener(this);
         map.setOnMapLongClickListener(this);
 
-       /* Button button1 = (Button) rootView.findViewById(R.id.button7);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(new Intent(getActivity(), GamesActivity.class));
-                startActivity(intent);
-            }
-        });*/
         ImageButton popup_men = (ImageButton) rootView.findViewById(R.id.button_popup);
         popup_men.setOnClickListener(new View.OnClickListener() {
 
@@ -149,12 +135,18 @@ public class MapFragment
                 //слушатель нажатий по пунктам OnMenuItemClickListener:
                 PopupMenu popup_menu = new PopupMenu(getActivity(), view);
                 popup_menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+
                 public boolean onMenuItemClick(MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.game_menu:
                               //Toast.makeText(this, "Выбран пункт 1", Toast.LENGTH_SHORT).show();
                               startActivity(new Intent(getActivity(), GamesActivity.class));
                               return true;
+                        case R.id.map_menu:
+                            //Toast.makeText(this, "Выбран пункт 3", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getActivity(), DemoActivity.class));
+                            return true;
                         case R.id.teams_menu:
                               //Toast.makeText(this, "Выбран пункт 2", Toast.LENGTH_SHORT).show();
                               startActivity(new Intent(getActivity(), TeamsActivity.class));
@@ -166,7 +158,9 @@ public class MapFragment
                     return true;
                   }
               });
-                    popup_menu.inflate(R.menu.popup_menu_map);
+
+                    popup_menu.inflate(R.menu.popup_menu);
+
                     popup_menu.show();
                 }
             });
@@ -179,8 +173,7 @@ public class MapFragment
 
     textView = (TextView) infoWindowContainer.findViewById(R.id.textview_title);
     myImageView = (ImageView)infoWindowContainer.findViewById(R.id.imageView);
-    //  button = (TextView) infoWindowContainer.findViewById(R.id.button_view_article);
-    // button.setOnClickListener(this);
+
 
 
     return rootView;
@@ -216,9 +209,7 @@ public class MapFragment
 
     @Override
     public void onClick(View v) {
-      //  String name = (String) v.getTag();
-       // startActivity( new Intent(getActivity(),CheckInInfoActivity.class));
-       // startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://www.google.com/search?q=" + name)));
+
     }
 
     @Override
@@ -247,8 +238,18 @@ public class MapFragment
         if (!spots.containsKey(marker)) { infoWindowContainer.setVisibility(INVISIBLE); return false;}
 
             CheckIn spot = spots.get(marker);
-            textView.setText(spot.getName());
-            myImageView.setImageResource(R.drawable.hellokitty);
+            ArrayList<Param> garbage =spot.getGarb_param();
+            StringBuffer buffer=new StringBuffer();
+            buffer.append(spot.getComment()+"\n");
+            int AllGarbage=0;
+            for (int i=0;i<garbage.size();i++){
+                buffer.append(garbage.get(i).getName()+" "+garbage.get(i).getAmount()+"\n");
+                AllGarbage+=garbage.get(i).getAmount();
+            }
+            buffer.append("Общее кол-во:"+AllGarbage);
+            textView.setText(buffer);
+        if (spot.photo!=null){
+            myImageView.setImageBitmap(spot.getPhoto());} else  myImageView.setImageResource(R.drawable.hellokitty);
 
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -270,18 +271,20 @@ public class MapFragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == -1) {
-                String result = data.getStringExtra("comment")+"\n"+data.getStringExtra("garbage");
+                
+                LocationProvider locationProvider= LocationProvider.Initialize();
+                CheckIn checkIn=locationProvider.getCheckin();
+                LatLng locationTemp=checkIn.getLocation();
                 final MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(temp);
-                markerOptions.title(temp.latitude + " : " + temp.longitude);
-                map.animateCamera(CameraUpdateFactory.newLatLng(temp));
+                markerOptions.position(checkIn.getLocation());
+                markerOptions.title(locationTemp.latitude + " : " + locationTemp.longitude);
+                map.animateCamera(CameraUpdateFactory.newLatLng(locationTemp));
                 Projection projection = map.getProjection();
                 BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.pin);
                 Marker m =   map.addMarker(markerOptions.icon(icon));
                 Date cDate = new Date();
-
                 String fDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(cDate);
-                spots.put(m,new CheckIn(result,temp));
+                spots.put(m,checkIn);
             }
             if (resultCode == 1) {
                 //Write your code if there's no result
@@ -304,15 +307,8 @@ public class MapFragment
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Handle a positive answer
+                        LocationProvider locationProvider=LocationProvider.Initialize(temp,true);
                         startActivityForResult(new Intent(getActivity(), CheckInInfoActivity.class), 1);
-
-/*
-                        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.pin);
-                        Marker m =   map.addMarker(markerOptions.icon(icon));
-                        Date cDate = new Date();
-
-                        String fDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(cDate);
-                        spots.put(m, new CheckIn("check-in", latLng));*/
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -364,33 +360,38 @@ public class MapFragment
     }
 
     private void markerInitializer(){
-        GameProvider provider= GameProvider.Initialize(new Game(), false);
+        GameProvider provider= GameProvider.Initialize(new Game());
         Game game = provider.getGame();
-
+        ArrayList<CheckIn> checkIns = Repository.getCheckins();
         ArrayList<Location> locations=game.base_loc;
         for (int i=0;i<locations.size();i++) {
+            BitmapDescriptor icon=null;
             Location location=locations.get(i);
             LatLng point=location.getLoc();
              switch(location.getRole()){
                  case BASE: {
                      map.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 5.5f));
-                     BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.base);
-                     MarkerOptions markerOptions = new MarkerOptions();
-                     markerOptions.position(point);
-                     markerOptions.title(point.latitude + " : " + point.longitude);
-                     Marker m = map.addMarker(markerOptions.icon(icon));
+                     icon = BitmapDescriptorFactory.fromResource(R.drawable.base);
                      break;
                  }
                  case WAREHOUSE:{
-                     BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.warehouse);
-                     MarkerOptions markerOptions = new MarkerOptions();
-                     markerOptions.position(point);
-                     markerOptions.title(point.latitude + " : " + point.longitude);
-                     Marker m = map.addMarker(markerOptions.icon(icon));
+                     icon = BitmapDescriptorFactory.fromResource(R.drawable.warehouse);
                      break;
                  }
              }
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(point);
+            markerOptions.title(point.latitude + " : " + point.longitude);
+            Marker m = map.addMarker(markerOptions.icon(icon));
 
+        }
+        for (int i=0; i<checkIns.size();i++){
+            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.pin);
+            LatLng point=checkIns.get(i).getLocation();
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(point);
+            Marker m = map.addMarker(markerOptions.icon(icon));
+            if (!spots.containsKey(m)){spots.put(m,checkIns.get(i));}
         }
     }
 

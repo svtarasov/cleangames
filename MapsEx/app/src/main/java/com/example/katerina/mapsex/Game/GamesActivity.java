@@ -1,4 +1,4 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.Game;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.katerina.mapsex.R;
+import com.example.katerina.mapsex.Repository;
+import com.example.katerina.mapsex.Team.TeamsActivity;
 import com.example.katerina.mapsex.datamodels.Game;
 
 import java.util.ArrayList;

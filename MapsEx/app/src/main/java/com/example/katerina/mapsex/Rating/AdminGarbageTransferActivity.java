@@ -1,4 +1,4 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.Rating;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.katerina.mapsex.R;
 
 /**
  * Created by 1 on 15.07.2015.
@@ -49,13 +51,7 @@ public class AdminGarbageTransferActivity extends Activity{
             public void onClick(View v) {
 
 
-                a = Text1.getText().toString()+" ";
-                b= getResources().getString(R.string.garbage1)+": "+garbage1.getText().toString()+"\n"+getResources().getString(R.string.garbage2)+": "+garbage2.getText()+"\n"+getResources().getString(R.string.garbage3)+": "+garbage3.getText()+"\n"+getResources().getString(R.string.garbage4)+": "+garbage4.getText()+"\n"+getResources().getString(R.string.garbage5)+": "+garbage5.getText();
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra("comment",a);
-                returnIntent.putExtra("garbage",b);
-                setResult(RESULT_OK,returnIntent);
-                finish();
+
 
 
 

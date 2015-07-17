@@ -1,22 +1,46 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.Map;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+
+
+import com.example.katerina.mapsex.datamodels.CheckIn;
+import com.example.katerina.mapsex.datamodels.Param;
+import com.google.android.gms.maps.model.LatLng;
+import com.example.katerina.mapsex.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import com.example.katerina.mapsex.R;
+
 
 
 public class CheckInInfoActivity extends Activity{
     String a, b;
-    EditText Text1;
-
+    Bitmap imageBitmap;
+    EditText commentText;
+    String mCurrentPhotoPath;
+    private static final int CAMERA_REQUEST = 1888;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_in);
-        Text1 = (EditText) findViewById(R.id.EditText01);
+        commentText = (EditText) findViewById(R.id.EditText01);
 
 
         final Button button1 = (Button) findViewById(R.id.button_submit);
@@ -30,9 +54,21 @@ public class CheckInInfoActivity extends Activity{
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                    LocationProvider locationProvider=LocationProvider.Initialize();
+                    LatLng location=locationProvider.getLocataion();
+                    ArrayList<Param> garbage=new ArrayList<Param>();
+                    garbage.add(new Param("Пластик",Integer.parseInt(garbage1.getText().toString())));
+                    garbage.add(new Param("Металл",Integer.parseInt(garbage2.getText().toString())));
+                    garbage.add(new Param("Стекло",Integer.parseInt(garbage3.getText().toString())));
+                    garbage.add(new Param("Смешанный мусор",Integer.parseInt(garbage1.getText().toString())));
+                    garbage.add(new Param("Батарейки",Integer.parseInt(garbage1.getText().toString())));
+                    CheckIn checkIn=new CheckIn(commentText.getText().toString(),garbage,location,imageBitmap);
+                    locationProvider.setCheckin(checkIn);
 
-                    a = Text1.getText().toString()+" ";
+
+                 /*  a = commentText.getText().toString()+" ";
                     b= getResources().getString(R.string.garbage1)+": "+garbage1.getText().toString()+"\n"+getResources().getString(R.string.garbage2)+": "+garbage2.getText()+"\n"+getResources().getString(R.string.garbage3)+": "+garbage3.getText()+"\n"+getResources().getString(R.string.garbage4)+": "+garbage4.getText()+"\n"+getResources().getString(R.string.garbage5)+": "+garbage5.getText();
+                    */
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("comment",a);
                     returnIntent.putExtra("garbage",b);
@@ -157,17 +193,60 @@ public class CheckInInfoActivity extends Activity{
         final Button button10 = (Button) findViewById(R.id.button10);
         button10.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Integer temp= Integer.parseInt(garbage5.getText().toString());
+                Integer temp = Integer.parseInt(garbage5.getText().toString());
                 temp++;
                 garbage5.getText().clear();
                 garbage5.getText().append(temp.toString());
             }
 
         });
+
+        final ImageButton photo = (ImageButton) findViewById(R.id.TakeAPhoto);
+        photo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+               dispatchTakePictureIntent();
+            }
+
+        });
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(takePictureIntent, CAMERA_REQUEST);
+
+
     }
 
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            imageBitmap = (Bitmap) extras.get("data");
+
+
+
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
+    }
 
 }
 

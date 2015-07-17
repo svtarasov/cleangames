@@ -1,4 +1,4 @@
-package com.example.katerina.mapsex;
+package com.example.katerina.mapsex.Team;
 
 import com.example.katerina.mapsex.datamodels.Team;
 
@@ -22,7 +22,13 @@ public class TeamProvider {
 
     }
 
-    public Team getGame(){
+    public static TeamProvider Initialize(Team team){
+
+            return instance;
+
+
+    }
+    public Team getTeam(){
         return this.team;
     }
 
