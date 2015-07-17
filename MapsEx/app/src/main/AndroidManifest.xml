@@ -67,6 +67,7 @@
                 android:value=".Registration.LoginActivity" />
         </activity>
         <activity
+            
 
             android:name=".Registration.RegisterActivity"
             android:label="@string/title_activity_registration"
