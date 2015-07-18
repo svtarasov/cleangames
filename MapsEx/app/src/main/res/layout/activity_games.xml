@@ -7,8 +7,6 @@
     tools:context="com.example.katerina.mapsex.Game.GamesActivity"
     android:clickable="false">
 
-
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
