@@ -42,28 +42,28 @@ public class CertainTeamActivity extends ActionBarActivity {
         mAdapter = new CertainTeamAdapter(this,exampleList);
         listViewUsers.setAdapter(mAdapter);
         findViewById(R.id.button_popup)
-                //Следим за нажатиями по кнопке:
+                //РЎР»РµРґРёРј Р·Р° РЅР°Р¶Р°С‚РёСЏРјРё РїРѕ РєРЅРѕРїРєРµ:
                 .setOnClickListener(new View.OnClickListener() {
 
-                    //Обрабатываем нажатие кнопки Button:
+                    //РћР±СЂР°Р±Р°С‚С‹РІР°РµРј РЅР°Р¶Р°С‚РёРµ РєРЅРѕРїРєРё Button:
                     @Override
                     public void onClick(View view) {
-                        //Вызываем popup меню, заполняем его с файла popup.xml и настраиваем
-                        //слушатель нажатий по пунктам OnMenuItemClickListener:
+                        //Р’С‹Р·С‹РІР°РµРј popup РјРµРЅСЋ, Р·Р°РїРѕР»РЅСЏРµРј РµРіРѕ СЃ С„Р°Р№Р»Р° popup.xml Рё РЅР°СЃС‚СЂР°РёРІР°РµРј
+                        //СЃР»СѓС€Р°С‚РµР»СЊ РЅР°Р¶Р°С‚РёР№ РїРѕ РїСѓРЅРєС‚Р°Рј OnMenuItemClickListener:
                         PopupMenu popup_menu = new PopupMenu(CertainTeamActivity.this, view);
                         popup_menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             public boolean onMenuItemClick(MenuItem item) {
                                 switch (item.getItemId()) {
                                     case R.id.game_menu:
-                                        //Toast.makeText(this, "Выбран пункт 1", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(this, "Р’С‹Р±СЂР°РЅ РїСѓРЅРєС‚ 1", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(CertainTeamActivity.this, GamesActivity.class));
                                         return true;
                                     case R.id.teams_menu:
-                                        //Toast.makeText(this, "Выбран пункт 2", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(this, "Р’С‹Р±СЂР°РЅ РїСѓРЅРєС‚ 2", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(CertainTeamActivity.this, TeamsActivity.class));
                                         return true;
                                     case R.id.map_menu:
-                                        //Toast.makeText(this, "Выбран пункт 3", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(this, "Р’С‹Р±СЂР°РЅ РїСѓРЅРєС‚ 3", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(CertainTeamActivity.this, DemoActivity.class));
                                         return true;
                                     case R.id.rating_menu:
