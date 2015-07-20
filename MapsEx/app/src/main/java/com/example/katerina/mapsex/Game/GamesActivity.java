@@ -9,10 +9,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.katerina.mapsex.Map.DemoActivity;
 import com.example.katerina.mapsex.R;
+import com.example.katerina.mapsex.Registration.UserProvider_temp;
 import com.example.katerina.mapsex.Repository;
 import com.example.katerina.mapsex.Team.TeamsActivity;
 import com.example.katerina.mapsex.datamodels.Game;
+import com.example.katerina.mapsex.datamodels.Team;
+import com.example.katerina.mapsex.datamodels.User;
 
 import java.util.ArrayList;
 
@@ -24,7 +28,7 @@ public class GamesActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games);
-        setTitle("Games");
+        setTitle("Игры");
 
         final ListView listViewGames = (ListView) findViewById(R.id.listGames);
         // listViewTeams.getSelectedItem()
@@ -34,9 +38,18 @@ public class GamesActivity extends ActionBarActivity {
         listViewGames.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(GamesActivity.this, TeamsActivity.class);
                 Game game = (Game) parent.getItemAtPosition(position);
-                GameProvider provaider= GameProvider.Initialize(game,true);
+                GameProvider provider= GameProvider.Initialize(game,true);
+                UserProvider_temp uprovider = UserProvider_temp.Initialize(new User());
+                User user = uprovider.getUser();
+                Team team = user.getTeam();
+                Intent intent;
+                if (team == null) {
+                    intent = new Intent(GamesActivity.this, TeamsActivity.class);
+                }else{
+                    intent = new Intent(GamesActivity.this, DemoActivity.class);
+                }
+                //delete next line
                 intent.putExtra("Name", game.name);
                 startActivity(intent);
             }

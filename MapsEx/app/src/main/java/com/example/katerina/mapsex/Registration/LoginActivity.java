@@ -27,6 +27,8 @@ import android.widget.TextView;
 
 import com.example.katerina.mapsex.Game.GamesActivity;
 import com.example.katerina.mapsex.R;
+import com.example.katerina.mapsex.datamodels.Team;
+import com.example.katerina.mapsex.datamodels.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -81,9 +83,10 @@ public class LoginActivity extends Activity {
         startActivity(intent);
     }
 
-
+    //button JUMP
     public void onClick_demo(View view) {
         Intent intent = new Intent(LoginActivity.this, GamesActivity.class);
+        UserProvider_temp provider = UserProvider_temp.Initialize(new User("1","Саша","Александров", new Team(),true));
         startActivity(intent);
     }
 

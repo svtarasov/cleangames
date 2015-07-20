@@ -13,7 +13,7 @@ public class User {
     public String surname;
     public String email;
     public Team team;
-    public boolean isAmin;
+    public boolean isAdmin;
 
     public Time getCreatedTime() {
         return createdTime;
@@ -23,12 +23,12 @@ public class User {
         this.createdTime = createdTime;
     }
 
-    public boolean isAmin() {
-        return isAmin;
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
     public void setIsAmin(boolean isAmin) {
-        this.isAmin = isAmin;
+        this.isAdmin = isAdmin;
     }
 
     public Team getTeam() {
@@ -74,4 +74,20 @@ public class User {
              this.id = id;
                this.name = name;
            }
+    public User(String id, String name, String surname,boolean isAdmin ){
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.isAdmin = isAdmin;
+    }
+
+    public User(String id, String name, String surname, Team team, boolean isAdmin ){
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.team = team;
+        this.isAdmin = isAdmin;
+    }
+
+    public User(){}
 }
