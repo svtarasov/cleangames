@@ -37,14 +37,21 @@
         <uses-library android:name="com.google.android.maps" />
 
         <activity
-            android:name=".Registration.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:name=".Registration.CleanGamesActivity"
+            android:label="@string/title_activity_cleangames">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Registration.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Registration.CleanGamesActivity" />
         </activity>
         <activity
             android:name=".Map.DemoActivity"
@@ -60,8 +67,7 @@
         </activity>
         <activity
             android:name=".Registration.PasswordActivity"
-            android:label="@string/title_activity_parol"
-            android:parentActivityName=".Registration.LoginActivity" >
+            android:label="@string/title_activity_password">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Registration.LoginActivity" />
@@ -70,11 +76,10 @@
             
 
             android:name=".Registration.RegisterActivity"
-            android:label="@string/title_activity_registration"
-            android:parentActivityName=".Registration.LoginActivity" >
+            android:label="@string/title_activity_registration">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Registration.LoginActivity" />
+                android:value=".Registration.LoginActivity"    />
         </activity>
         <activity
             android:name=".Team.TeamsActivity"
@@ -86,7 +91,10 @@
         </activity>
         <activity
             android:name=".Game.GamesActivity"
-            android:label="@string/title_activity_games" >
+            android:label="@string/title_activity_games">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Registration.CleanGamesActivity" />
         </activity>
         <activity
             android:name=".Team.NewTeamActivity"
@@ -102,3 +110,5 @@
     </application>
 
 </manifest>
+
+
