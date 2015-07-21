@@ -26,7 +26,7 @@
       <file leaf-file-name="DataBaseHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DataBaseHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56478405">
+            <state vertical-scroll-proportion="6.4950166">
               <caret line="242" column="9" selection-start-line="242" selection-start-column="9" selection-end-line="242" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -104,8 +104,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
+    <option name="x" value="-66" />
+    <option name="y" value="33" />
     <option name="width" value="1384" />
     <option name="height" value="738" />
   </component>
@@ -132,8 +132,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -526,15 +526,16 @@
       <workItem from="1437343328963" duration="3334000" />
       <workItem from="1437380889182" duration="6280000" />
       <workItem from="1437387569317" duration="1429000" />
+      <workItem from="1437469528788" duration="1604000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42209000" />
+    <option name="totallyTimeSpent" value="43813000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1384" height="738" extended-state="0" />
-    <editor active="false" />
+    <frame x="-66" y="33" width="1384" height="738" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -545,7 +546,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -608,6 +609,43 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/DataBaseHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1437386960981" expanded="true" signature="2769:2808" placeholder="select count..Team..." />
+            <marker date="1437386960981" expanded="true" signature="2769:2809" placeholder="select count..Team..." />
+            <marker date="1437386960981" expanded="true" signature="2769:2826" placeholder="select count..Team..." />
+            <marker date="1437386960981" expanded="true" signature="3054:3109" placeholder="insert into ..." />
+            <marker date="1437386960981" expanded="true" signature="4427:4491" placeholder="update Team ..." />
+            <marker date="1437386960981" expanded="true" signature="5465:5518" placeholder="delete from ..." />
+            <marker date="1437386960981" expanded="true" signature="6479:6566" placeholder="insert into ..." />
+            <marker date="1437386960981" expanded="true" signature="6479:6574" placeholder="insert into ..." />
+            <marker date="1437386960981" expanded="true" signature="7781:7850" placeholder="insert into ..." />
+            <marker date="1437386960981" expanded="true" signature="8935:8957" placeholder="update Param..." />
+            <marker date="1437386960981" expanded="true" signature="8935:8985" placeholder="update Param..." />
+            <marker date="1437386960981" expanded="true" signature="8935:8986" placeholder="update Param..." />
+            <marker date="1437386960981" expanded="true" signature="8935:8990" placeholder="update Param..." />
+            <marker date="1437386960981" expanded="true" signature="8935:9010" placeholder="update Param..." />
+            <marker date="1437386960981" expanded="true" signature="8941:8957" placeholder="insert into ..." />
+            <marker date="1437386960981" expanded="true" signature="10127:10191" placeholder="delete from ..." />
+            <marker date="1437386960981" expanded="true" signature="11191:11293" placeholder="insert into ..." />
+            <marker date="1437386960981" expanded="true" signature="12619:12651" placeholder="select Email..User..." />
+            <marker date="1437386960981" expanded="true" signature="12619:12652" placeholder="select Email..User..." />
+            <marker date="1437386960981" expanded="true" signature="13741:13782" placeholder="select count..User..." />
+            <marker date="1437386960981" expanded="true" signature="14026:14069" placeholder="update User ..." />
+            <marker date="1437386960981" expanded="true" signature="15265:15311" placeholder="update User ..." />
+            <marker date="1437386960981" expanded="true" signature="16306:16398" placeholder="insert into ..." />
+            <marker date="1437386960981" expanded="true" signature="17508:17530" placeholder="select Name ..Team..." />
+            <marker date="1437386960981" expanded="true" signature="17508:17540" placeholder="select Name ..Team..." />
+            <marker date="1437386960981" expanded="true" signature="17508:17541" placeholder="select Name ..Team..." />
+            <marker date="1437386960981" expanded="true" signature="17529:17530" placeholder="insert into ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/DataBaseHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -869,7 +907,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DataBaseHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56478405">
+        <state vertical-scroll-proportion="6.4950166">
           <caret line="242" column="9" selection-start-line="242" selection-start-column="9" selection-end-line="242" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
