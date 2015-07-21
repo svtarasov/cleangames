@@ -23,11 +23,12 @@ public class CleanGamesActivity extends Activity {
         setContentView(R.layout.activity_clean_games);
         Button jump = (Button)findViewById(R.id.button_jump);
         Button auth = (Button)findViewById(R.id.button_auth);
+
         jump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CleanGamesActivity.this, GamesActivity.class);
-                UserProvider_temp provider = UserProvider_temp.Initialize(new User("1","Саша","Александров", new Team(),true));
+                UserProvider_temp provider = UserProvider_temp.Initialize(new User("1","РЎР°С€Р°","РђР»РµРєСЃР°РЅРґСЂРѕРІ", new Team(),true));
                 startActivity(intent);
             }
         });
@@ -38,14 +39,5 @@ public class CleanGamesActivity extends Activity {
                 startActivity(intent);
             }
         });
-    }
-
-    public void onClick_auth(View view) {
-
-    }
-
-    public void onClick_jump(View view) {
-        Intent intent = new Intent(CleanGamesActivity.this, GamesActivity.class);
-        startActivity(intent);
     }
 }

@@ -14,8 +14,6 @@ import com.example.katerina.mapsex.R;
  * Created by 1 on 15.07.2015.
  */
 public class AdminGarbageTransferActivity extends Activity{
-    String a, b;
-    EditText Text1;
     TextView command_name;
     TextView  command_score;
 
@@ -23,7 +21,7 @@ public class AdminGarbageTransferActivity extends Activity{
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_transfer);
-         command_name=(TextView) findViewById(R.id.command_name);
+        command_name=(TextView) findViewById(R.id.command_name);
         command_score=(TextView) findViewById(R.id.command_score);
         Bundle extras = getIntent().getExtras();
         String name; int score;
