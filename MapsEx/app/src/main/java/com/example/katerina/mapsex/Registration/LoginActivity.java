@@ -49,7 +49,6 @@ public class LoginActivity extends Activity {
 
     public void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
 
         inputEmail = (EditText) findViewById(R.id.email);
@@ -58,7 +57,7 @@ public class LoginActivity extends Activity {
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
-
+            @Override
             public void onClick(View view) {
                 String email = inputEmail.getText().toString();
                 String password = inputPassword.getText().toString();
@@ -67,7 +66,7 @@ public class LoginActivity extends Activity {
 
         });
         btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
-
+            @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
                         RegisterActivity.class);
@@ -76,7 +75,6 @@ public class LoginActivity extends Activity {
             }
         });
     }
-
 
     public void onClick(View view) {
         Intent intent = new Intent(LoginActivity.this, PasswordActivity.class);
@@ -89,8 +87,6 @@ public class LoginActivity extends Activity {
         UserProvider_temp provider = UserProvider_temp.Initialize(new User("1","Саша","Александров", new Team(),true));
         startActivity(intent);
     }
-
-
 
     public void authorize(View view) {
         runUlogin();

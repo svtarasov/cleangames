@@ -1,6 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:focusableInTouchMode="true"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/bg_login"
@@ -20,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
+
 
     <ImageView
         android:layout_width="wrap_content"
@@ -122,7 +122,6 @@
 
         </LinearLayout>
     </ScrollView>
-
 
 </LinearLayout>
 
