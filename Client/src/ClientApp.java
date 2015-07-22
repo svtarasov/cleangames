@@ -1,8 +1,12 @@
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import com.sun.deploy.net.HttpResponse;
+import javafx.scene.control.TextInputControl;
+import sun.net.www.http.HttpClient;
+
+import javax.swing.text.AbstractDocument;
+import java.io.*;
 import java.net.*;
+import java.text.*;
+import java.nio.charset.StandardCharsets;
 
 public class ClientApp {
 
@@ -11,14 +15,18 @@ public class ClientApp {
     public static void main(String args[]) {
 
         ClientApp Exp = new ClientApp();
-        Exp.CreateChekin(1, 1, 1, 1.055555, 1.9784, "Все хорошо");
+        Exp.CreateTeam("time is wrong",2);
 
     }
 
-    public void CreateChekin(int UserID, int TeamID, int ProjectID, double PlaceX, double PlaceY, String Comments ){
-        String targetURL = "http://localhost:8080/api";
-        String urlParameters = "ActionType=CreateChekin&UserID=" + UserID + "&ProjectID=" + ProjectID +
-                "&TeamID=" + TeamID + "&PlaceX=" + PlaceX + "&PlaceY=" + PlaceY + "&Comments=" + Comments;
+    public void CreateTeam(String teamName, int userID){
+
+        String targetURL = "http://api.cleangames.ru/ServletTest/Servlet";
+        String urlParameters = "ActionType=CreateTeam&TeamName="
+                + teamName +"&UserID=" + userID;
+
+
+        //System.out.println(urlParameters);
         URL url;
         HttpURLConnection connection = null;
         try {
@@ -38,18 +46,20 @@ public class ClientApp {
             connection.setDoOutput(true);
 
             //Send request
-            DataOutputStream wr = new DataOutputStream(
-                    connection.getOutputStream());
-            wr.writeBytes(urlParameters);
+            OutputStream wr = connection.getOutputStream();
+            wr.write(urlParameters.getBytes("UTF-8"));
             wr.flush();
             wr.close();
 
             //Get Response
+            //TextInputControl.Content is = connection.getContent();
+            //String is = response.getEntity;
+            //System.out.println(is);
             InputStream is = connection.getInputStream();
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is,"UTF-8"));
             String line;
             while ((line = rd.readLine()) != null) {
-                System.out.println(line);
+                  System.out.println(line);
             }
             rd.close();
         } catch (Exception e) {
