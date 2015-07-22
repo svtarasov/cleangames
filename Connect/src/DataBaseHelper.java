@@ -1,5 +1,11 @@
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class DataBaseHelper {
 
@@ -11,11 +17,12 @@ public class DataBaseHelper {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         DataBaseHelper connect = new DataBaseHelper();
 
-        String TeamName = "�������";
-        connect.CreateTeam(TeamName);
+       /* if (request.getParameter("ActionType").equals("CreateTeam")) {
+            connect.CreateTeam(request.getParameter("Name"));
+        } */
 
         /* String ProjectName = "jaja";
         String Desc = "blabla";
@@ -26,16 +33,54 @@ public class DataBaseHelper {
         double Price = 2.5;
         connect.CreateGarbageParametr(PrijectID, GarbageParametr, Price); */
 
-        /*String GarbageParametr1 = "�������";
+        /*String GarbageParametr1 = "Пластик";
         double Price1 = 3.5;
         connect.UpdateGarbageParametr(GarbageParametr1, Price1); */
 
-        /*String email = "jhksd@gmail.com";
+        String email = "jhkfgsd@gmail.com";
         String password = "jkjkjsd";
         String name = "ab";
         String surname = "gkh";
-        boolean isAdm = false;
-        connect.SignUpUser(email, password, name, surname, isAdm); */
+        int answ;
+        answ = connect.SignUpUser(email, password, name, surname);
+        if (answ == 0) {
+            System.out.println("Регистрация прошла успешно! Приятной игры :)");
+        }
+        if (answ == 1) {
+            System.out.println("Этот email уже зарегестрирован!");
+        }
+        if (answ == 2) {
+            System.out.println("Упс, непредвиленная ошибка!");
+        }
+
+
+
+
+
+        /*String email = "qw@mail.ru";
+        String password = "qwkety";
+        int Answer = 0;
+        Answer = connect.SignInUser(email, password);
+        //connect.SignInUser(email, password);
+        if (Answer == 0) {
+            System.out.println("Все ок");
+        }
+        if (Answer == 1) {
+            System.out.println("Такого пользователя не существует!");
+        }
+        if (Answer == 2) {
+            System.out.println("Неверный пароль");
+        }
+        if (Answer == 3) {
+            System.out.println("Упс, непредвиденная ошибка");
+        } */
+        //connect.TestSelect(5);
+
+
+
+
+
+
 
         /*int id = 2;
         int teamID = 1;
@@ -44,18 +89,18 @@ public class DataBaseHelper {
 
         /* connect.LeaveTeam(4); */
 
-        /* connect.CreateLocation(1, 0.4555, 9.368, 1, "�������"); */
+        /* connect.CreateLocation(1, 0.4555, 9.368, 1, "оыипамл"); */
 
         /*connect.TestSelect(1); */
 
 
         /* InsertIntoTeam iit = new InsertIntoTeam();
-        String TeamName = "������� ����������";
+        String TeamName = "Веселые бурундучки";
         iit.InsertIntoTeam(TeamName); */
 
         /*UpdateTeamName utn = new UpdateTeamName();
         String NewTeamName = "123";
-        String OldTeamName = "������� ���������� ������!";
+        String OldTeamName = "Веселые бурундучки вперед!";
         utn.UpdateTeamName(OldTeamName, NewTeamName); */
 
         /* DeleteTeam dt = new DeleteTeam();
@@ -64,9 +109,35 @@ public class DataBaseHelper {
 
         /* CreateGarbageParametr cgp = new CreateGarbageParametr();
         int ProjectID = 1;
-        String GarbageParametr = "���������";
+        String GarbageParametr = "Батарейка";
         double Price = 5;
         cgp.CreateGarbageParametr(ProjectID, GarbageParametr, Price); */
+
+        /*DateFormat dateFormat = DateFormat.getDateInstance();
+        Date ourDate = dateFormat.parse("01.01.2000");
+        System.out.println(ourDate);
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println(format1.format(ourDate)); */
+        List<String> teamParticipants = new ArrayList<>();
+        teamParticipants = connect.GetTeamParticipants(1);
+        for (int i = 0; i < teamParticipants.size(); i++) {
+            System.out.println(teamParticipants.get(i));
+        }
+        List<String> teamlist = new ArrayList<>();
+        teamlist = connect.GetTeamList();
+        for (int i = 0; i < teamlist.size(); i++) {
+            System.out.println(teamlist.get(i));
+        }
+        List<String> parameterslist = new ArrayList<>();
+        parameterslist = connect.GetParametersList();
+        for (int i = 0; i < parameterslist.size(); i++) {
+            System.out.println(parameterslist.get(i));
+        }
+
+
+
+
+
 
 
 
@@ -76,7 +147,272 @@ public class DataBaseHelper {
         Connection conn = null;
         Statement stmt = null;
 
-    public void CreateTeam(String teamName) {
+
+
+
+    private List<String>  GetCheckinList() {
+        List<String> checkinList = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(myUrl, User, Pass);
+            System.out.println("Connected to database succesfully...");
+
+            Statement st1 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            String SQLquery = "select Name from Parameters";
+            PreparedStatement ps1 = conn.prepareStatement(SQLquery);
+            ResultSet rs1 = st1.executeQuery(SQLquery);
+            ps1.execute();
+            while (rs1.next()) {
+                String teamName = rs1.getString("Name");
+                checkinList.add(teamName);
+            }
+            rs1.close();
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return checkinList;
+    }
+
+    private void CreateTransferItem(int transferID, int parameterID, double value) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(myUrl, User, Pass);
+            System.out.println("Connected to database succesfully...");
+
+            String query = "insert into TransferItem (GarbageTransferID, ParametersID, Value)" + " values (?, ?, ?)";
+
+            PreparedStatement pS = conn.prepareStatement(query);
+            pS.setInt(1, transferID);
+            pS.setInt(2, parameterID);
+            pS.setDouble(3, value);
+
+            pS.execute();
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+
+
+    private int CreateTransfer(String teamName, int locationID) {
+        int id = 0;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(myUrl, User, Pass);
+            System.out.println("Connected to database succesfully...");
+
+            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            String sqlQuery = "select ID from Team where Name = '" + teamName + "'";
+            ResultSet rs = st.executeQuery(sqlQuery);
+            rs.next();
+            int teamID = rs.getInt("ID");
+
+
+            String query = "insert into Transfer (TeamID, LocationID, CreatedTime)" + " values (?, ?, ?)";
+            long timeNow = Calendar.getInstance().getTimeInMillis();
+            java.sql.Timestamp startDate = new java.sql.Timestamp(timeNow);
+
+            PreparedStatement pS = conn.prepareStatement(query);
+            pS.setInt(1, teamID);
+            pS.setInt(2, locationID);
+            pS.setTimestamp(3, startDate);
+            sqlQuery = "select ID from Transfer where Name = '" + teamName + "'";
+            rs = st.executeQuery(sqlQuery);
+            rs.next();
+            id = rs.getInt("ID");
+            rs.close();
+
+            pS.execute();
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return id;
+    }
+
+    //Получить список параметров мусора
+    private List<String> GetParametersList() {
+        List<String> parametersList = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(myUrl, User, Pass);
+            System.out.println("Connected to database succesfully...");
+
+            Statement st1 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            String SQLquery = "select Name from Parameters";
+            PreparedStatement ps1 = conn.prepareStatement(SQLquery);
+            ResultSet rs1 = st1.executeQuery(SQLquery);
+            ps1.execute();
+            while (rs1.next()) {
+                String teamName = rs1.getString("Name");
+                parametersList.add(teamName);
+            }
+            rs1.close();
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return parametersList;
+    }
+
+    //Получить список всех команд
+    private List<String> GetTeamList() {
+        List<String> teamList = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(myUrl, User, Pass);
+            System.out.println("Connected to database succesfully...");
+
+            Statement st1 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            String SQLquery = "select Name from Team";
+            PreparedStatement ps1 = conn.prepareStatement(SQLquery);
+            ResultSet rs1 = st1.executeQuery(SQLquery);
+            ps1.execute();
+            while (rs1.next()) {
+                String teamName = rs1.getString("Name");
+                teamList.add(teamName);
+            }
+            rs1.close();
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return teamList;
+    }
+
+    //Получить список участников команды
+    private List<String> GetTeamParticipants(int teamID) {
+        List<String> teamParticipants = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(myUrl, User, Pass);
+            System.out.println("Connected to database succesfully...");
+
+            Statement st1 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            String SQLquery = "select Name, Surname from User where TeamID = " + teamID;
+            PreparedStatement ps1 = conn.prepareStatement(SQLquery);
+            ResultSet rs1 = st1.executeQuery(SQLquery);
+            ps1.execute();
+            while (rs1.next()) {
+                String name = rs1.getString("Name");
+                String surname = rs1.getString("Surname");
+                teamParticipants.add(name + " " + surname);
+            }
+
+
+            rs1.close();
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null)
+                    conn.close();
+            } catch (SQLException se) {
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return teamParticipants;
+    }
+
+    //Создать команду
+    private void CreateTeam(String teamName) {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -97,6 +433,9 @@ public class DataBaseHelper {
             if (count == 0) {
                 String query = "insert into Team (Name, CreatedTime)" + " values (?, ?)";
                 Calendar calendar = Calendar.getInstance();
+                //startDate = calendar.getTime().getTime();
+                //long curTime = System.currentTimeMillis();
+                //Date curDate = new Date(curTime);
                 java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
 
                 PreparedStatement pS = conn.prepareStatement(query);
@@ -105,7 +444,7 @@ public class DataBaseHelper {
 
                 pS.execute();
             } else {
-                System.out.println("������� � ����� ��������� ��� ����������!");
+                System.out.println("Команда с таким названием уже существует!");
             }
 
         } catch (SQLException se) {
@@ -127,7 +466,8 @@ public class DataBaseHelper {
         }
     }
 
-    public void UpdateTeamName(String oldTeamName, String newTeamName) {
+    //Изменить название команды
+    private void UpdateTeamName(String oldTeamName, String newTeamName) {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -163,6 +503,7 @@ public class DataBaseHelper {
         }
     }
 
+    //Удалить команду
     private void DeleteTeam(String teamName) {
 
         try {
@@ -199,52 +540,7 @@ public class DataBaseHelper {
     }
 
 
-   /* private void CreateProject(String projectName, String description) {
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-
-            System.out.println("Connecting to database...");
-            conn = DriverManager.getConnection(myUrl, User, Pass);
-            System.out.println("Connected to database succesfully...");
-
-
-            String query = "insert into Projects (ProjectDate, Name, Description)"
-                    + " values (?, ?, ?)";
-
-            Date date = new Date();
-
-            java.sql.Date projectDate = new java.sql.Date();
-
-            PreparedStatement pS = conn.prepareStatement(query);
-
-            pS.setString(1, projectDate);
-            pS.setString(2, projectName);
-            pS.setString(3, description);
-
-            pS.execute();
-
-        } catch (SQLException se) {
-            se.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (stmt != null)
-                    conn.close();
-            } catch (SQLException se) {
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-    } */
-
-
-    private void CreateGarbageParametr(int projectID, String parameterName, double price) {
+    private void CreateGarbageParameter(int projectID, String parameterName, double price) {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -282,9 +578,7 @@ public class DataBaseHelper {
         }
     }
 
-
-
-    private void UpdateGarbageParametr(String garbageParametr, double newPrice) {
+    private void UpdateGarbageParameter(String garbageParametr, double newPrice) {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -357,7 +651,9 @@ public class DataBaseHelper {
         }
     }
 
-    private void SignUpUser(String email, String password, String userName, String userSurname, boolean isAdmin) {
+    //Регистрация пользователя
+    private int SignUpUser(String email, String password, String userName, String userSurname) {
+        int answ = 2;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -366,21 +662,61 @@ public class DataBaseHelper {
             conn = DriverManager.getConnection(myUrl, User, Pass);
             System.out.println("Connected to database succesfully...");
 
+            /*Statement st1 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            String SQLquery = "select count(*) from User where Email = '" + email + "'";
+            PreparedStatement ps1 = conn.prepareStatement(SQLquery);
+            ResultSet rs1 = st1.executeQuery(SQLquery);
+            ps1.execute();
+            rs1.next();
+            int count = rs1.getInt(1);
 
-            String query = "insert into User (Email, Password, Name, Surname, IsAdmin, CreatedTime)" + " values (?, ?, ?, ?, ?, ?)";
-            Calendar calendar = Calendar.getInstance();
-            java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
+            if (count == 1) {
+                String query = "insert into User (Email, Password, Name, Surname, IsAdmin, CreatedTime)" + " values (?, ?, ?, ?, ?, ?)";
+                Calendar calendar = Calendar.getInstance();
+                java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
 
-            PreparedStatement pS = conn.prepareStatement(query);
-            pS.setString(1, email);
-            pS.setString(2, password);
-            pS.setString(3, userName);
-            pS.setString(4, userSurname);
-            pS.setBoolean(5, isAdmin);
-            pS.setDate(6, startDate);
+                PreparedStatement pS = conn.prepareStatement(query);
+                pS.setString(1, email);
+                pS.setString(2, password);
+                pS.setString(3, userName);
+                pS.setString(4, userSurname);
+                pS.setBoolean(5, true);
+                pS.setDate(6, startDate);
+                pS.execute();
 
+            } else {*/
 
-            pS.execute();
+            Statement st1 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            String SQLquery = "select count(*) from User where Email = '" + email + "'";
+            PreparedStatement ps1 = conn.prepareStatement(SQLquery);
+            ResultSet rs1 = st1.executeQuery(SQLquery);
+            ps1.execute();
+            rs1.next();
+            int count = rs1.getInt(1);
+
+            if (count == 0) {
+                answ = 0;
+                String query = "insert into User (Email, Password, Name, Surname, IsAdmin, CreatedTime)" + " values (?, ?, ?, ?, ?, ?)";
+
+                long timeNow = Calendar.getInstance().getTimeInMillis();
+                java.sql.Timestamp startDate = new java.sql.Timestamp(timeNow);
+                //Calendar calendar = Calendar.getInstance();
+                //java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
+
+                PreparedStatement pS = conn.prepareStatement(query);
+                pS.setString(1, email);
+                pS.setString(2, password);
+                pS.setString(3, userName);
+                pS.setString(4, userSurname);
+                pS.setBoolean(5, false);
+                pS.setTimestamp(6, startDate);
+                pS.execute();
+            } else {
+                answ = 1;
+            }
+            //}
 
         } catch (SQLException se) {
             se.printStackTrace();
@@ -399,11 +735,13 @@ public class DataBaseHelper {
                 se.printStackTrace();
             }
         }
+        return answ;
     }
 
+    //Авторизация пользователя
+    private int SignInUser(String email, String password) {
 
-    /*private void SignInUser(String email, String password) {
-
+        int answ = 3;
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -411,12 +749,31 @@ public class DataBaseHelper {
             conn = DriverManager.getConnection(myUrl, User, Pass);
             System.out.println("Connected to database succesfully...");
 
+            Statement st1 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            String SQLquery = "select count(*) from User where Email = '" + email + "'";
+            PreparedStatement ps1 = conn.prepareStatement(SQLquery);
+            ResultSet rs1 = st1.executeQuery(SQLquery);
+            ps1.execute();
+            rs1.next();
+            int count = rs1.getInt(1);
 
-            String query = "select Email, Password from User";
-
-            PreparedStatement pS = conn.prepareStatement(query);
-
-            pS.execute();
+            if (count == 1) {
+                String query = "select Password from User where Email = '" + email + "'";
+                PreparedStatement pS = conn.prepareStatement(query);
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);
+                pS.execute();
+                rs.next();
+                String pass = rs.getString("Password");
+                if (pass.equals(password)) {
+                    answ = 0;
+                } else {
+                    answ = 2;
+                }
+            } else {
+                answ = 1;
+            }
 
         } catch (SQLException se) {
             se.printStackTrace();
@@ -435,8 +792,10 @@ public class DataBaseHelper {
                 se.printStackTrace();
             }
         }
-    } */
+        return answ;
+    }
 
+    //Добавить пользователя к команде
     private void JoinUserToTeam(int id, int teamID, int maxCount) {
 
         try {
@@ -463,8 +822,8 @@ public class DataBaseHelper {
                 pS.execute();
             }
             else {
-                System.out.println("�� �� ������ �������������� � �������, ��� ��� ���������� ������� �� ������ ��������� "
-                        + maxCount + " �������");
+                System.out.println("Вы не можете присоединиться к команде, так как количество игроков не должно превышать "
+                        + maxCount + " человек");
             }
 
 
@@ -489,6 +848,7 @@ public class DataBaseHelper {
         }
     }
 
+    //Исключить пользователя из команды
     private void LeaveTeam(int id) {
 
         try {
@@ -576,8 +936,8 @@ public class DataBaseHelper {
             System.out.println("Connected to database succesfully...");
 
 
-            String query = "select Name from Team where ID = " + teamID;
 
+            String query = "select Name from Team where ID = " + teamID;
             PreparedStatement pS = conn.prepareStatement(query);
 
             Statement st = conn.createStatement();
