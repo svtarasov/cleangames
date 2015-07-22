@@ -17,8 +17,8 @@ import com.example.katerina.mapsex.Map.DemoActivity;
 import com.example.katerina.mapsex.R;
 import com.example.katerina.mapsex.Repository;
 import com.example.katerina.mapsex.Team.TeamsActivity;
-import com.example.katerina.mapsex.datamodels.Game;
-import com.example.katerina.mapsex.datamodels.Team;
+import com.datamodel.datamodels.Game;
+import com.datamodel.datamodels.Team;
 
 import java.util.ArrayList;
 

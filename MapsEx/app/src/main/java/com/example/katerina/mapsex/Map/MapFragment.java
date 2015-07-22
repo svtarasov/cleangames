@@ -28,10 +28,10 @@ import com.example.katerina.mapsex.Rating.RatingActivity;
 import com.example.katerina.mapsex.Repository;
 import com.example.katerina.mapsex.Team.TeamsActivity;
 
-import com.example.katerina.mapsex.datamodels.CheckIn;
-import com.example.katerina.mapsex.datamodels.Game;
-import com.example.katerina.mapsex.datamodels.Location;
-import com.example.katerina.mapsex.datamodels.Param;
+import com.datamodel.datamodels.CheckIn;
+import com.datamodel.datamodels.Game;
+import com.datamodel.datamodels.Location;
+import com.datamodel.datamodels.Param;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;

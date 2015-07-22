@@ -3,10 +3,7 @@ package com.example.katerina.mapsex.Registration;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,14 +11,13 @@ import com.example.katerina.mapsex.DBAdapter;
 import com.example.katerina.mapsex.Game.GamesActivity;
 import com.example.katerina.mapsex.LocalBackUp;
 import com.example.katerina.mapsex.R;
-import com.example.katerina.mapsex.datamodels.Team;
-import com.example.katerina.mapsex.datamodels.User;
+import com.datamodel.datamodels.Team;
+import com.datamodel.datamodels.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.DoubleBuffer;
 
 public class CleanGamesActivity extends Activity {
 
@@ -38,7 +34,7 @@ public class CleanGamesActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(CleanGamesActivity.this, GamesActivity.class);
 
-                UserProvider_temp provider = UserProvider_temp.Initialize(new User("1","Саша","Александров", new Team(),true));
+                UserProvider provider = UserProvider.Initialize(new User("1","Саша","Александров", new Team(),true));
 
                 startActivity(intent);
             }

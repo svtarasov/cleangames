@@ -1,14 +1,13 @@
 package com.example.katerina.mapsex;
 
-import android.widget.ImageView;
-
-import com.example.katerina.mapsex.datamodels.Game;
-import com.example.katerina.mapsex.datamodels.Location;
-import com.example.katerina.mapsex.datamodels.LocationRole;
-import com.example.katerina.mapsex.datamodels.Team;
-import com.example.katerina.mapsex.datamodels.User;
+import com.datamodel.datamodels.Game;
+import com.datamodel.datamodels.Location;
+import com.datamodel.datamodels.LocationRole;
+import com.datamodel.datamodels.Team;
+import com.datamodel.datamodels.User;
 import com.google.android.gms.maps.model.LatLng;
-import com.example.katerina.mapsex.datamodels.*;
+import com.datamodel.datamodels.CheckIn;
+import com.datamodel.datamodels.Param;
 
 import java.util.ArrayList;
 

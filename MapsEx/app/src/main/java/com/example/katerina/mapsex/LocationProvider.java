@@ -1,8 +1,9 @@
 package com.example.katerina.mapsex;
 
-import com.example.katerina.mapsex.datamodels.CheckIn;
-import com.example.katerina.mapsex.datamodels.Game;
 import com.google.android.gms.maps.model.LatLng;
+
+
+import com.datamodel.datamodels.CheckIn;
 
 /**
  * Created by 1 on 16.07.2015.

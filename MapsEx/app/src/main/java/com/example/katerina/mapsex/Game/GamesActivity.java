@@ -11,12 +11,12 @@ import android.widget.ListView;
 
 import com.example.katerina.mapsex.Map.DemoActivity;
 import com.example.katerina.mapsex.R;
-import com.example.katerina.mapsex.Registration.UserProvider_temp;
+import com.example.katerina.mapsex.Registration.UserProvider;
 import com.example.katerina.mapsex.Repository;
 import com.example.katerina.mapsex.Team.TeamsActivity;
-import com.example.katerina.mapsex.datamodels.Game;
-import com.example.katerina.mapsex.datamodels.Team;
-import com.example.katerina.mapsex.datamodels.User;
+import com.datamodel.datamodels.Game;
+import com.datamodel.datamodels.Team;
+import com.datamodel.datamodels.User;
 
 import java.util.ArrayList;
 
@@ -40,7 +40,7 @@ public class GamesActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Game game = (Game) parent.getItemAtPosition(position);
                 GameProvider provider= GameProvider.Initialize(game,true);
-                UserProvider_temp uprovider = UserProvider_temp.Initialize(new User());
+                UserProvider uprovider = UserProvider.Initialize(new User());
                 User user = uprovider.getUser();
                 Team team = user.getTeam();
                 Intent intent;

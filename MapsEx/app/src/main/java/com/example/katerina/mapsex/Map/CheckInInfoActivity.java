@@ -15,11 +15,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 
-import com.example.katerina.mapsex.datamodels.CheckIn;
-import com.example.katerina.mapsex.datamodels.Param;
+import com.datamodel.datamodels.CheckIn;
+import com.datamodel.datamodels.Param;
 import com.google.android.gms.maps.model.LatLng;
 import com.example.katerina.mapsex.*;
 

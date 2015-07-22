@@ -1,6 +1,6 @@
 package com.example.katerina.mapsex.Game;
 
-import com.example.katerina.mapsex.datamodels.Game;
+import com.datamodel.datamodels.Game;
 
 /**
  * Created by 1 on 10.07.2015.
