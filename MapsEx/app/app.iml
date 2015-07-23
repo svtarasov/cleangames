@@ -143,5 +143,6 @@
     <orderEntry type="library" exported="" name="play-services-identity-7.5.0" level="project" />
     <orderEntry type="library" exported="" name="datamodellib" level="project" />
     <orderEntry type="library" exported="" name="play-services-maps-7.5.0" level="project" />
+    <orderEntry type="module" module-name="vksdk_library" exported="" />
   </component>
 </module>

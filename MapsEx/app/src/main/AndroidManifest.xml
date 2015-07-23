@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.katerina.mapsex" >
 
+    <meta-data android:name="com.vk.sdk.AppId" android:value="5003387" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -72,8 +74,6 @@
                 android:value=".Registration.LoginActivity" />
         </activity>
         <activity
-            
-
             android:name=".Registration.RegisterActivity"
             android:label="@string/title_activity_registration">
             <meta-data
@@ -100,12 +100,14 @@
             android:label="@string/title_activity_new_team" >
         </activity>
         <activity
-            android:name="ru.ulogin.sdk.UloginAuthActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
             android:name=".Rating.RatingActivity"
             android:label="@string/title_activity_rating" >
         </activity>
+        <activity android:name="com.vk.sdk.VKOpenAuthActivity" />
+
+        <activity
+            android:name="ru.ulogin.sdk.UloginAuthActivity"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>

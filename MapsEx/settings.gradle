@@ -1,1 +1,1 @@
-include ':datamodellib', ':app'
+include ':datamodellib', ':vksdk_library', ':app'
