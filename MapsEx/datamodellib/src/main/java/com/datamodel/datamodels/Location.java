@@ -6,8 +6,6 @@ import com.google.android.gms.maps.model.LatLng;
  * Created by Katerina on 10.07.2015.
  */
 public class Location {
-
-
     private int ID;
     private int project_ID;
     private String comment;

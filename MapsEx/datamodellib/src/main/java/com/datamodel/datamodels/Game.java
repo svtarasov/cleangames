@@ -11,15 +11,17 @@ import java.util.Date;
  * Created by Katerina on 06.07.2015.
  */
 public class Game {
-    public String ID;
-    public String name;
-    public Date date;
-    public Time start_time;
-    public Time end_time;
-    public String description;
-    public LatLng start_point;
-    public ArrayList<Location> base_loc;
-    public ArrayList<Param> parameters;
+
+
+    private int ID;
+    private String name;
+    private Date date;
+    private Time start_time;
+    private Time end_time;
+    private String description;
+    private LatLng start_point;
+    private ArrayList<Location> base_loc;
+    private ArrayList<Param> parameters;
 
     public String getName() {
         return name;
@@ -29,7 +31,7 @@ public class Game {
         this.name = name;
     }
 
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
@@ -81,15 +83,25 @@ public class Game {
         this.parameters = parameters;
     }
 
+    public Game(int ID, String name, Date date, Time start_time, Time end_time, String description, ArrayList<Location> base_loc, LatLng start_point, ArrayList<Param> parameters) {
+        this.ID = ID;
+        this.name = name;
+        this.date = date;
+        this.start_time = start_time;
+        this.end_time = end_time;
+        this.description = description;
+        this.base_loc = base_loc;
+        this.start_point = start_point;
+        this.parameters = parameters;
+    }
 
 
-
-    public Game(String ID, String name, LatLng start_point){
+    public Game(int ID, String name, LatLng start_point){
         this(ID,name);
         this.start_point=start_point;
     }
 
-   public Game(String ID,String name, ArrayList<Location> locations){
+   public Game(int ID,String name, ArrayList<Location> locations){
         this(ID,name);
         this.base_loc=locations;
 
@@ -98,7 +110,7 @@ public class Game {
     public Game(){}
 
 
-    Game(String ID,String name){
+    Game(int ID,String name){
         this.ID=ID;
         this.name=name;
     }

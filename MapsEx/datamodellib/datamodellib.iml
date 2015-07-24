@@ -29,5 +29,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="android" level="project" />
     <orderEntry type="library" exported="" name="google-play-services" level="project" />
+    <orderEntry type="library" exported="" name="datamodellib.datamodellib" level="project" />
   </component>
 </module>
