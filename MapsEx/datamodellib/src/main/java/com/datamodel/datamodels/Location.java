@@ -6,13 +6,15 @@ import com.google.android.gms.maps.model.LatLng;
  * Created by Katerina on 10.07.2015.
  */
 public class Location {
-    public int ID;
-    public int project_ID;
-    public String name;
-    public LocationRole role;
-    public LatLng loc;
+    private int ID;
+    private int project_ID;
+    private String comment;
+    private LocationRole role;
+    private LatLng loc;
 
-
+    public void setID(int ID) {
+        this.ID = ID;
+    }
     public int getID() {
         return ID;
     }
@@ -25,15 +27,15 @@ public class Location {
         this.project_ID = project_ID;
     }
 
-    public String getName() {
-        return name;
+    public String getComment() {
+        return comment;
     }
 
     public LocationRole getRole() {
         return role;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public LatLng getLoc() {
@@ -44,10 +46,19 @@ public class Location {
         this.loc = loc;
     }
 
+    public Location(int ID, int project_ID, String name, LocationRole role, LatLng loc ){
+        this.ID = ID;
+        this.project_ID = project_ID;
+        this.comment =name;
+        this.role=role;
+        this.loc=loc;
+    }
 
-   public Location(String name, LocationRole role,LatLng loc ){
+    public Location(){}
 
-        this.name=name;
+    public Location(String name, LocationRole role,LatLng loc ){
+
+        this.comment =name;
         this.role=role;
         this.loc=loc;
     }

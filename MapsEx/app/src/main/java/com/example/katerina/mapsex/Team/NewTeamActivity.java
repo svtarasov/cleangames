@@ -1,14 +1,17 @@
 package com.example.katerina.mapsex.Team;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.katerina.mapsex.R;
+import com.example.katerina.mapsex.Repository;
 
 
 public class NewTeamActivity extends ActionBarActivity {
@@ -23,17 +26,22 @@ public class NewTeamActivity extends ActionBarActivity {
         setTitle("New Team");
         NameOfTeam = (EditText) findViewById(R.id.NameOfTeam);
         NoName = (TextView) findViewById(R.id.NoName);
+        final Context context = this;
         findViewById(R.id.Create).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (NameOfTeam.getText().length() == 0) {
                     NoName.setText("Input the name of the team!");
                 } else {
-                    startActivity(new Intent(NewTeamActivity.this, TeamsActivity.class));
+                    NameOfTeam.setText(Repository.createNewTeam(NameOfTeam.getText().toString(), context,3));
+                    //startActivity(new Intent(NewTeamActivity.this, TeamsActivity.class));
                 }
             }
         });
     }
+
+
+
 
    /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {

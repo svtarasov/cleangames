@@ -6,12 +6,13 @@ import android.text.format.Time;
  * Created by Katerina on 06.07.2015.
  */
 public class User {
-    public  String id;
-    public String name;
-    public String surname;
-    public String email;
-    public Team team;
-    public boolean isAdmin;
+    private int id;
+    private String name;
+    private String surname;
+    private String email;
+    private Team team;
+    private boolean isAdmin;
+    private Time createdTime;
 
     public Time getCreatedTime() {
         return createdTime;
@@ -61,25 +62,31 @@ public class User {
         this.name = name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public Time createdTime;
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
 
-    public User(String id, String name){
+
+    public User(int id, String name){
              this.id = id;
                this.name = name;
            }
-    public User(String id, String name, String surname,boolean isAdmin ){
+    public User(int id, String name, String surname,boolean isAdmin ){
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.isAdmin = isAdmin;
     }
 
-    public User(String id, String name, String surname, Team team, boolean isAdmin ){
+    public User(int id, String name, String surname, Team team, boolean isAdmin ){
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -88,4 +95,14 @@ public class User {
     }
 
     public User(){}
+
+    public User(int id, boolean isAdmin, Team team, String email, String surname, String name, Time createdTime) {
+        this.id = id;
+        this.isAdmin = isAdmin;
+        this.team = team;
+        this.email = email;
+        this.surname = surname;
+        this.name = name;
+        this.createdTime = createdTime;
+    }
 }

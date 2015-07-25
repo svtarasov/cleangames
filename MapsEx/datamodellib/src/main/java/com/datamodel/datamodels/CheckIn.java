@@ -7,13 +7,13 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 
 public class CheckIn {
-    public int ID;
-    public User user;
-    public Team team;
-    public LatLng location;
-    public ArrayList<Param> garb_param;
-    public Bitmap photo;
-    public String comment;
+    private int ID;
+    private User user;
+    private Team team;
+    private LatLng location;
+    private ArrayList<Param> garb_param;
+    private Bitmap photo;
+    private String comment;
 
 
     public LatLng getLocation() {

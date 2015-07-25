@@ -4,11 +4,19 @@ package com.datamodel.datamodels;
  * Created by Katerina on 10.07.2015.
  */
 public class Param {
-    public int ID;
-    public String name;
-    public int amount;
-    public Game project;
-    public int price;
+
+
+
+    private int ID;
+    private String name;
+    private int amount;
+    private Game project;
+    private int price;
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
     public int getID() {
         return ID;
     }
@@ -50,6 +58,13 @@ public class Param {
         this.name=name;
     }
 
+    public Param(int ID, String name, int amount, Game project, int price) {
+        this.ID = ID;
+        this.name = name;
+        this.amount = amount;
+        this.project = project;
+        this.price = price;
+    }
 
 
 }
