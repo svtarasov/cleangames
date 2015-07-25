@@ -70,11 +70,6 @@ public class CheckInInfoActivity extends Activity{
                     garbage.add(new Param("Батарейки",Integer.parseInt(garbage1.getText().toString())));
                     CheckIn checkIn=new CheckIn(commentText.getText().toString(),garbage,location,imageBitmap);
                     locationProvider.setCheckin(checkIn);
-
-
-                 /*  a = commentText.getText().toString()+" ";
-                    b= getResources().getString(R.string.garbage1)+": "+garbage1.getText().toString()+"\n"+getResources().getString(R.string.garbage2)+": "+garbage2.getText()+"\n"+getResources().getString(R.string.garbage3)+": "+garbage3.getText()+"\n"+getResources().getString(R.string.garbage4)+": "+garbage4.getText()+"\n"+getResources().getString(R.string.garbage5)+": "+garbage5.getText();
-                    */
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("comment",a);
                     returnIntent.putExtra("garbage",b);
@@ -211,18 +206,13 @@ public class CheckInInfoActivity extends Activity{
         photo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 selectImage();
-              // dispatchTakePictureIntent();
+
             }
 
         });
     }
 
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(takePictureIntent, CAMERA_REQUEST);
 
-
-    }
 
 
 
