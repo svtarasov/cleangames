@@ -13,6 +13,7 @@ import com.example.katerina.mapsex.LocalBackUp;
 import com.example.katerina.mapsex.R;
 import com.datamodel.datamodels.Team;
 import com.datamodel.datamodels.User;
+import com.vk.sdk.VKSdk;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,7 +43,14 @@ public class CleanGamesActivity extends Activity {
         auth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CleanGamesActivity.this, LoginActivity.class);
+                Intent intent;
+                if (VKSdk.isLoggedIn()) {
+                     intent = new Intent(CleanGamesActivity.this, GamesActivity.class);
+                } else {
+                     intent = new Intent(CleanGamesActivity.this, LoginActivity.class);
+                }
+
+
                 startActivity(intent);
             }
         });

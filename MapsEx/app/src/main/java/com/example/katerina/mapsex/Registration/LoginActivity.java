@@ -16,6 +16,7 @@ import com.example.katerina.mapsex.R;
 import com.datamodel.datamodels.Team;
 import com.datamodel.datamodels.User;
 import com.vk.sdk.VKAccessToken;
+import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKScope;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.VKSdkListener;
@@ -40,6 +41,13 @@ import ru.ulogin.sdk.UloginAuthActivity;
  */
 public class LoginActivity extends Activity {
 
+    private static final String[] sMyScope = new String[]{
+            VKScope.FRIENDS,
+            VKScope.WALL,
+            VKScope.PHOTOS,
+            VKScope.NOHTTPS
+    };
+
     private Button btnLogin;
     private Button btnLinkToRegister;
     private EditText inputEmail;
@@ -51,9 +59,9 @@ public class LoginActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //VK SDK initialization
-        VKSdk.initialize(sdkListener, "5003387", VKAccessToken.tokenFromSharedPreferences(this, sTokenKey));
-        VKUIHelper.onCreate(this);
+
+
+
 
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
@@ -69,6 +77,8 @@ public class LoginActivity extends Activity {
             }
 
         });
+
+
         btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,11 +88,78 @@ public class LoginActivity extends Activity {
                 finish();
             }
         });
+        VKSdk.wakeUpSession(this, new VKCallback<VKSdk.LoginState>() {
+            @Override
+            public void onResult(VKSdk.LoginState res) {
+                switch (res) {
+                    case LoggedOut:
+                        showLogin();
+                        break;
+                    case LoggedIn:
+                        showLogout();
+                        break;
+                    case Pending:
+                        break;
+                    case Unknown:
+                        break;
+                }
+            }
+
+            @Override
+            public void onError(VKError error) {
+
+            }
+        });
+
     }
+    private void showLogout() {
+
+    }
+
+    private void showLogin() {
+        }
+
 
     public void onClick(View view) {
         Intent intent = new Intent(LoginActivity.this, PasswordActivity.class);
         startActivity(intent);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        if (VKSdk.isLoggedIn()) {
+            showLogout();
+        } else {
+            showLogin();
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        VKCallback<VKAccessToken> callback = new VKCallback<VKAccessToken>() {
+            @Override
+            public void onResult(VKAccessToken res) {
+                // User passed Authorization
+
+
+                startTestActivity();
+            }
+
+            @Override
+            public void onError(VKError error) {
+                // User didn't pass Authorization
+            }
+        };
+
+        if (!VKSdk.onActivityResult(requestCode, resultCode, data, callback) ) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void startTestActivity() {
+        startActivity(new Intent(this, GamesActivity.class));
     }
 
     //button JUMP
@@ -122,7 +199,7 @@ public class LoginActivity extends Activity {
         startActivityForResult(intent, REQUEST_ULOGIN);
     }
 
-    //Getting uLogin data
+ /*   //Getting uLogin data
     @SuppressWarnings("unchecked")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -152,9 +229,9 @@ public class LoginActivity extends Activity {
             }
         }
     }
-
+*/
     //Listener for VK SDK initialization
-    private VKSdkListener sdkListener = new VKSdkListener() {
+ /*   private VKSdkListener sdkListener = new VKSdkListener() {
         @Override
         public void onCaptchaError(VKError captchaError) {
             new VKCaptchaDialog(captchaError).show();
@@ -185,11 +262,13 @@ public class LoginActivity extends Activity {
             Intent i = new Intent(LoginActivity.this, CleanGamesActivity.class);
             startActivity(i);
         }
-    };
+    };*/
 
     //VK SDK Authorization
     public void authorize(View view) {
-        VKSdk.authorize(vkScope, true, false);
+        VKSdk.login(this, sMyScope);
+
+       /* VKSdk.authorize(vkScope, true, false);
         VKRequest nameRequest = VKApi.users().get(VKParameters.from(VKApiConst.FIELDS, "id"));
         final Context context = this;
 
@@ -208,7 +287,7 @@ public class LoginActivity extends Activity {
             public void attemptFailed(VKRequest request, int attemptNumber, int totalAttempts) {
                 Toast.makeText(context, "Attempt failed", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 }
 
