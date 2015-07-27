@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.datamodel.datamodels.User;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.VKError;
+import com.vk.sdk.util.VKUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,6 +31,8 @@ public class CleanGamesActivity extends FragmentActivity {
     final Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String[] fingerprint = VKUtil.getCertificateFingerprint(this, this.getPackageName());
+        Log.e("Fingerprint", fingerprint[0]);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         VKSdk.wakeUpSession(this, new VKCallback<VKSdk.LoginState>() {
