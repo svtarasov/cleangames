@@ -32,7 +32,7 @@ public class GamesActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games);
         setTitle("Игры");
-        Toast.makeText(this, VKAccessToken.currentToken().accessToken, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Your email: " + VKAccessToken.currentToken().email, Toast.LENGTH_SHORT).show();
 
         final ListView listViewGames = (ListView) findViewById(R.id.listGames);
         // listViewTeams.getSelectedItem()

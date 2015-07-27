@@ -100,35 +100,24 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="15dp"
-                android:onClick="onClick"
+                android:onClick="rememberPassword"
                 android:text="Забыли пароль?" />
 
-            <Button
-                android:id="@+id/email_sign_in_with_social_networks"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Авторизация через соц.сети"
-                android:textStyle="bold"
-                android:onClick="uLoginAuth"/>
-
             <ImageButton
-
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:src="@drawable/vk_icon"
                 android:padding="0dp"
                 android:scaleType="centerCrop"
-                android:onClick="authorize"/>
+                android:onClick="vkAuthorize"/>
 
             <Button
                 android:id="@+id/button_demo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:onClick="onClick_demo"
+                android:onClick="Jump"
                 android:text="Jump" />
 
         </LinearLayout>
