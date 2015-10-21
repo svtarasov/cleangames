@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.katerina.mapsex.R;
-import com.example.katerina.mapsex.datamodels.Game;
+import com.datamodel.datamodels.Game;
 
 import java.util.ArrayList;
 

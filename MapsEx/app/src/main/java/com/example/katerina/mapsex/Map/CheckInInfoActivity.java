@@ -1,8 +1,12 @@
 package com.example.katerina.mapsex.Map;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,15 +15,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 
-import com.example.katerina.mapsex.datamodels.CheckIn;
-import com.example.katerina.mapsex.datamodels.Param;
+import com.datamodel.datamodels.CheckIn;
+import com.datamodel.datamodels.Param;
 import com.google.android.gms.maps.model.LatLng;
 import com.example.katerina.mapsex.*;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,7 +41,7 @@ public class CheckInInfoActivity extends Activity{
     EditText commentText;
     String mCurrentPhotoPath;
     private static final int CAMERA_REQUEST = 1888;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int SELECT_FILE = 1;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -64,11 +70,6 @@ public class CheckInInfoActivity extends Activity{
                     garbage.add(new Param("Батарейки",Integer.parseInt(garbage1.getText().toString())));
                     CheckIn checkIn=new CheckIn(commentText.getText().toString(),garbage,location,imageBitmap);
                     locationProvider.setCheckin(checkIn);
-
-
-                 /*  a = commentText.getText().toString()+" ";
-                    b= getResources().getString(R.string.garbage1)+": "+garbage1.getText().toString()+"\n"+getResources().getString(R.string.garbage2)+": "+garbage2.getText()+"\n"+getResources().getString(R.string.garbage3)+": "+garbage3.getText()+"\n"+getResources().getString(R.string.garbage4)+": "+garbage4.getText()+"\n"+getResources().getString(R.string.garbage5)+": "+garbage5.getText();
-                    */
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("comment",a);
                     returnIntent.putExtra("garbage",b);
@@ -204,32 +205,99 @@ public class CheckInInfoActivity extends Activity{
         final ImageButton photo = (ImageButton) findViewById(R.id.TakeAPhoto);
         photo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               dispatchTakePictureIntent();
+                selectImage();
+
             }
 
         });
     }
 
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(takePictureIntent, CAMERA_REQUEST);
 
-
-    }
 
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            imageBitmap = (Bitmap) extras.get("data");
+
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == CAMERA_REQUEST) {
+                Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+                File destination = new File(Environment.getExternalStorageDirectory(),
+                        System.currentTimeMillis() + ".jpg");
+                FileOutputStream fo;
+                try {
+                    destination.createNewFile();
+                    fo = new FileOutputStream(destination);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                imageBitmap = (Bitmap) thumbnail;
+
+            } else if (requestCode == SELECT_FILE) {
+                Uri selectedImageUri = data.getData();
+                String[] projection = { MediaStore.MediaColumns.DATA };
+                Cursor cursor = managedQuery(selectedImageUri, projection, null, null,
+                        null);
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+                cursor.moveToFirst();
+                String selectedImagePath = cursor.getString(column_index);
+                Bitmap bm;
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeFile(selectedImagePath, options);
+                final int REQUIRED_SIZE = 200;
+                int scale = 1;
+                while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+                        && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+                    scale *= 2;
+                options.inSampleSize = scale;
+                options.inJustDecodeBounds = false;
+                bm = BitmapFactory.decodeFile(selectedImagePath, options);
+                imageBitmap = (Bitmap) bm;
+            }
+
 
 
 
         }
     }
+
+    private void selectImage() {
+        final CharSequence[] items = { "Take Photo", "Choose from Library", "Cancel" };
+        AlertDialog.Builder builder = new AlertDialog.Builder(CheckInInfoActivity.this);
+        builder.setTitle("Add Photo!");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (items[item].equals("Take Photo")) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, CAMERA_REQUEST);
+                } else if (items[item].equals("Choose from Library")) {
+                    Intent intent = new Intent(
+                            Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                    startActivityForResult(
+                            Intent.createChooser(intent, "Select File"),
+                            SELECT_FILE);
+                } else if (items[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+
 
     private File createImageFile() throws IOException {
         // Create an image file name

@@ -1,6 +1,7 @@
 package com.example.katerina.mapsex.Game;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,11 +9,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.katerina.mapsex.Map.DemoActivity;
 import com.example.katerina.mapsex.R;
+import com.example.katerina.mapsex.Registration.UserProvider;
 import com.example.katerina.mapsex.Repository;
 import com.example.katerina.mapsex.Team.TeamsActivity;
-import com.example.katerina.mapsex.datamodels.Game;
+import com.datamodel.datamodels.Game;
+import com.datamodel.datamodels.Team;
+import com.datamodel.datamodels.User;
+import com.vk.sdk.VKAccessToken;
 
 import java.util.ArrayList;
 
@@ -24,7 +31,8 @@ public class GamesActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games);
-        setTitle("Games");
+        setTitle("Игры");
+        Toast.makeText(this, "Your email: " + VKAccessToken.currentToken().email, Toast.LENGTH_SHORT).show();
 
         final ListView listViewGames = (ListView) findViewById(R.id.listGames);
         // listViewTeams.getSelectedItem()
@@ -34,9 +42,18 @@ public class GamesActivity extends ActionBarActivity {
         listViewGames.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(GamesActivity.this, TeamsActivity.class);
                 Game game = (Game) parent.getItemAtPosition(position);
-                GameProvider provaider= GameProvider.Initialize(game,true);
+                GameProvider provider= GameProvider.Initialize(game,true);
+                UserProvider uprovider = UserProvider.Initialize(new User());
+                User user = uprovider.getUser();
+                Team team = user.getTeam();
+                Intent intent;
+                if (team == null) {
+                    intent = new Intent(GamesActivity.this, TeamsActivity.class);
+                }else{
+                    intent = new Intent(GamesActivity.this, DemoActivity.class);
+                }
+                //delete next line
                 intent.putExtra("Name", game.name);
                 startActivity(intent);
             }

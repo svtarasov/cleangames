@@ -29,7 +29,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/NameOfTeam"
         android:layout_alignEnd="@+id/NameOfTeam"
-        android:onClick="Create"/>
+        android:onClick="Create"
+        android:clickable="true" />
 
     <TextView
         android:layout_width="wrap_content"

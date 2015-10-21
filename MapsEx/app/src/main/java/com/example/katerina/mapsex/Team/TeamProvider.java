@@ -1,6 +1,6 @@
 package com.example.katerina.mapsex.Team;
 
-import com.example.katerina.mapsex.datamodels.Team;
+import com.datamodel.datamodels.Team;
 
 /**
  * Created by Katerina on 16.07.2015.

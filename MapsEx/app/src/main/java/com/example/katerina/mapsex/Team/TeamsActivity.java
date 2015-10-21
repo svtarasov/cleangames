@@ -16,8 +16,8 @@ import com.example.katerina.mapsex.Game.GamesActivity;
 import com.example.katerina.mapsex.R;
 import com.example.katerina.mapsex.Rating.RatingActivity;
 import com.example.katerina.mapsex.Repository;
-import com.example.katerina.mapsex.datamodels.Game;
-import com.example.katerina.mapsex.datamodels.Team;
+import com.datamodel.datamodels.Game;
+import com.datamodel.datamodels.Team;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,7 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
 
         GameProvider provider= GameProvider.Initialize(new Game());
         Game game = provider.getGame();
-        setTitle("Teams in game : " + game.name);
+        setTitle("РљРѕРјР°РЅРґС‹ РІ РёРіСЂРµ " + game.name);
 
         final ListView listViewTeams = (ListView) findViewById(R.id.listTeams);
         ArrayList<Team> exampleList = Repository.getTeams(new Game());
@@ -56,14 +56,14 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
         });
 
         findViewById(R.id.button_popup)
-                //Следим за нажатиями по кнопке:
+                //РЎР»РµРґРёРј Р·Р° РЅР°Р¶Р°С‚РёСЏРјРё РїРѕ РєРЅРѕРїРєРµ:
                 .setOnClickListener(new View.OnClickListener() {
 
-                    //Обрабатываем нажатие кнопки Button:
+                    //РћР±СЂР°Р±Р°С‚С‹РІР°РµРј РЅР°Р¶Р°С‚РёРµ РєРЅРѕРїРєРё Button:
                     @Override
                     public void onClick(View view) {
-                        //Вызываем popup меню, заполняем его с файла popup.xml и настраиваем
-                        //слушатель нажатий по пунктам OnMenuItemClickListener:
+                        //Р’С‹Р·С‹РІР°РµРј popup РјРµРЅСЋ, Р·Р°РїРѕР»РЅСЏРµРј РµРіРѕ СЃ С„Р°Р№Р»Р° popup.xml Рё РЅР°СЃС‚СЂР°РёРІР°РµРј
+                        //СЃР»СѓС€Р°С‚РµР»СЊ РЅР°Р¶Р°С‚РёР№ РїРѕ РїСѓРЅРєС‚Р°Рј OnMenuItemClickListener:
                         PopupMenu popup_menu = new PopupMenu(TeamsActivity.this, view);
                         popup_menu.setOnMenuItemClickListener(TeamsActivity.this);
                         popup_menu.inflate(R.menu.popup_menu);
@@ -72,19 +72,19 @@ public class TeamsActivity extends ActionBarActivity implements PopupMenu.OnMenu
                 });
     }
 
-    //Обрабатываем нажатия по пунктам popup меню, ссылаясь на id каждого пункта, заданные в файле popup.xml:
+    //РћР±СЂР°Р±Р°С‚С‹РІР°РµРј РЅР°Р¶Р°С‚РёСЏ РїРѕ РїСѓРЅРєС‚Р°Рј popup РјРµРЅСЋ, СЃСЃС‹Р»Р°СЏСЃСЊ РЅР° id РєР°Р¶РґРѕРіРѕ РїСѓРЅРєС‚Р°, Р·Р°РґР°РЅРЅС‹Рµ РІ С„Р°Р№Р»Рµ popup.xml:
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.game_menu:
-                //Toast.makeText(this, "Выбран пункт 1", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Р’С‹Р±СЂР°РЅ РїСѓРЅРєС‚ 1", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(TeamsActivity.this, GamesActivity.class));
                 return true;
             case R.id.map_menu:
-                //Toast.makeText(this, "Выбран пункт 3", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Р’С‹Р±СЂР°РЅ РїСѓРЅРєС‚ 3", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(TeamsActivity.this, DemoActivity.class));
                 return true;
             case R.id.teams_menu:
-                //Toast.makeText(this, "Выбран пункт 2", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Р’С‹Р±СЂР°РЅ РїСѓРЅРєС‚ 2", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(TeamsActivity.this, TeamsActivity.class));
                 return true;
             case R.id.rating_menu:

@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.6
+
+compileJava {
+    targetCompatibility = 1.6
+}
+
+dependencies {
+    compile files('lib/android.jar')
+    compile files('lib/google-play-services.jar')
+}
